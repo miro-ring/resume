@@ -1,6 +1,15 @@
 <script lang="ts">
+	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
+	import AppSidebar from '$lib/components/app-sidebar.svelte';
 	import '../app.css';
+
 	let { children } = $props();
 </script>
 
-{@render children()}
+<Sidebar.Provider>
+	<AppSidebar />
+	<main class="ml-0 p-4 transition-all duration-300 data-[sidebar-open=true]:ml-64">
+		<Sidebar.Trigger class="mb-4" />
+		{@render children?.()}
+	</main>
+</Sidebar.Provider>

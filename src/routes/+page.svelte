@@ -1,6 +1,8 @@
 <script lang="ts">
-	import { Button } from '$lib/components/ui/button/index.js';
 </script>
 
-<h1>Resume</h1>
-<Button>Click me</Button>
+<div class="space-y-4">
+	<h1 class="text-3xl font-bold">내 소개</h1>
+	<p>장동균입니다.</p>
+	<p>FE 개발자 입니다.</p>
+</div>
