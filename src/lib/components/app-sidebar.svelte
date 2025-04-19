@@ -7,28 +7,23 @@
 	const items = [
 		{
 			title: '홈',
-			url: '/',
-			icon: Home
+			url: '/'
 		},
 		{
 			title: '받은편지함',
-			url: '/inbox',
-			icon: Inbox
+			url: '/inbox'
 		},
 		{
 			title: '캘린더',
-			url: '/calendar',
-			icon: Calendar
+			url: '/calendar'
 		},
 		{
 			title: '검색',
-			url: '/search',
-			icon: Search
+			url: '/search'
 		},
 		{
 			title: '설정',
-			url: '/settings',
-			icon: Settings
+			url: '/settings'
 		}
 	];
 </script>
@@ -71,7 +66,6 @@
 									<Sidebar.MenuButton>
 										{#snippet child({ props })}
 											<a href={item.url} {...props}>
-												<svelte:component this={item.icon} />
 												<span>{item.title}</span>
 											</a>
 										{/snippet}
