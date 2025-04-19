@@ -63,7 +63,7 @@
 						<Sidebar.Menu>
 							{#each items as item (item.title)}
 								<Sidebar.MenuItem>
-									<Sidebar.MenuButton>
+									<Sidebar.MenuButton size="sm" class="ml-1">
 										{#snippet child({ props })}
 											<a href={item.url} {...props}>
 												<span>{item.title}</span>
