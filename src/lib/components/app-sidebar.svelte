@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Home, Inbox, Calendar, Search, Settings, ChevronDown } from '@lucide/svelte';
+	import { ChevronDown } from '@lucide/svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 
@@ -8,22 +8,6 @@
 		{
 			title: '홈',
 			url: '/'
-		},
-		{
-			title: '받은편지함',
-			url: '/inbox'
-		},
-		{
-			title: '캘린더',
-			url: '/calendar'
-		},
-		{
-			title: '검색',
-			url: '/search'
-		},
-		{
-			title: '설정',
-			url: '/settings'
 		}
 	];
 </script>
