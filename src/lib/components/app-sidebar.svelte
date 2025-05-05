@@ -2,14 +2,21 @@
 	import { ChevronDown } from '@lucide/svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
+	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import type { Post } from '../../types';
 
-	// 메뉴 아이템
-	const items = [
-		{
-			title: '홈',
-			url: '/'
-		}
-	];
+	let posts: Post[] = [];
+
+	onMount(async () => {
+		const res = await fetch('/api/posts');
+		const data = await res.json();
+		posts = data.filter((post: Post) => post.published); // 필요시 published 필터
+	});
+
+	const openPost = (slug: string) => {
+		goto(`/${slug}`);
+	};
 </script>
 
 <Sidebar.Root>
@@ -45,14 +52,15 @@
 				<Collapsible.Content>
 					<Sidebar.GroupContent>
 						<Sidebar.Menu>
-							{#each items as item (item.title)}
+							{#each posts as post}
 								<Sidebar.MenuItem>
 									<Sidebar.MenuButton size="sm" class="ml-1">
-										{#snippet child({ props })}
-											<a href={item.url} {...props}>
-												<span>{item.title}</span>
-											</a>
-										{/snippet}
+										<button
+											class="w-full text-left hover:underline"
+											on:click={() => openPost(post.slug || '')}
+										>
+											{post.title}
+										</button>
 									</Sidebar.MenuButton>
 								</Sidebar.MenuItem>
 							{/each}
