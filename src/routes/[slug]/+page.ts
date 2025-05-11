@@ -1,5 +1,7 @@
 import { error } from '@sveltejs/kit';
 
+export const prerender = false;
+
 export const load = async ({ params }) => {
 	try {
 		const post = await import(`../../posts/${params.slug}.svx`);
