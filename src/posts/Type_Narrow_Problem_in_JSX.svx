@@ -69,7 +69,7 @@ function makeSound(animal: Animal) {
 
 ---
 
-### 문제 상황
+### 객체 프로퍼티에 대한 type narrowing이 정상 동작하지 않는 문제
 
 ```typescript
 type Props = {
@@ -94,13 +94,13 @@ const Component = ({sender}: Props) => {
 ```
 
 `sender.contractNumber &&` 구문을 통해 `undefined`인 경우를 제거한다.
-덕분에 Button 컴포넌트의 contractNumber param의 value로 들어간 sender.contractNumber의 타입은 string으로 좁혀진 것을 확인할 수 있다.
+`Button` 컴포넌트의 `contractNumber`에 들어간 `sender.contractNumber` 타입은 `string`으로 좁혀진 것을 확인할 수 있다.
 
 하지만 `onClick` 내부에서 사용한 `sender.contractNumber`는 지속적으로 `string | undefined` 타입을 가지고 있어 문제를 발생시킨다.
 
 이는 `sender.contactNumber &&` 구문에서 TypeScript가 흐름을 따라 타입을 좁히지만,
 객체 리터럴의 속성 값으로 들어가는 경우는 “새로운 표현식”으로 간주되기 때문에 기존의 조건을 신뢰하지 않아 발생하는 차이이다.
-새로운 표현식 내부에서는 `sender.contactNumber`의 값이 수정될 수 있다 판단하여 기존의 `type narrowing`을 적용하지 않는다.
+새로운 표현식 내부에서는 객체의 프로퍼티 값이 수정될 수 있다 판단하여 기존의 `type narrowing`을 적용하지 않는다.
 
 | 표현                                                       | Narrowing 적용 여부 | 이유                                       |
 | -------------------------------------------------------- | --------------- | ---------------------------------------- |
@@ -108,7 +108,7 @@ const Component = ({sender}: Props) => {
 | `onClickButton({ contactNumber: sender.contactNumber })` | ❌ 안 됨           | 객체 속성으로 들어가면 별도의 표현식으로 평가되므로 flow 정보가 끊김 |
 
 TypeScript는 다음처럼 분석함:
-	•	sender.contactNumber && (...) → 이 자체가 하나의 표현식
+	•	`sender.contactNumber && (...)` → 이 자체가 하나의 표현식
 	•	JSX 자체가 표현식이기 때문에, 조건의 truthy 여부가 이 표현식 전체의 평가 조건과 1:1로 연결됨
 	•	따라서 `contactInfo={sender.contactNumber}`에서 narrowing이 유지된다
 
@@ -116,24 +116,54 @@ TypeScript는 다음처럼 분석함:
 
 함수 인자 객체의 경우:
 	•	이건 “객체 리터럴을 만들고 거기에 `sender.contactNumber`를 넣는” 별도의 표현식
-	•	이 시점에는 `sender.contactNumber`가 string | undefined 그대로임 (기존의 narrowing을 이어가지 못함)
+	•	이 시점에는 `sender.contactNumber`가 `string | undefined` 그대로임 (기존의 narrowing을 이어가지 못함)
 
 ---
 
 ### 해결 방법
 
+기존의 type narrowing이 유지될 수 있도록 처리한다. 이를 위해서 가장 좋은 방법은 const value를 사용하는 것이다. const value는 첫 평가 이후 그 값이 바뀌지 않는다. TypeScript는 이 흐름을 안전한 제어 흐름으로 판단하고 타입을 좁힐 수 있다.
+
+#### 1. 즉시실행함수를 활용하는 방법
 ```typescript
 {sender.contactNumber && (
 	{(() => {
-		const contactNumber = sender.contactNumber // string
-		return (
+    const contactNumber = sender.contactNumber // string
+    return (
 			<Button
 				contactNumber={sender.contactNumber}
 				onClick={() => {
 					onClickButton({contactNumber})
-				}
+				}}
 			/>
 		)
 	})()}
 )}
 ```
+
+1. `sender.contactNumber && (...)`
+→ 이 조건에 따라 전체 IIFE가 실행될지 말지가 결정됨
+2.	조건이 참(truthy)일 때만 IIFE가 실행됨
+→ IIFE 내부는 이미 `sender.contactNumber !== undefined`가 보장된 컨텍스트
+3. IIFE 안에서 `sender.contactNumber`를 다시 참조
+4. TypeScript는 이 참조를 narrowing된 값으로부터의 접근으로 봄. 따라서 여전히 string으로 인정함. `contactNumber`를 const로 저장했기 때문에, onClick 내부에서도 100% string으로 유지됨
+
+
+#### 2. JSX 외부에서 값을 참조하는 방법
+```typescript
+const outerContactNumber = sender.contactNumber // string | undefined
+
+// ...
+{outerContactNumber && ( // 이 시점에서 outerContactNumber는 string으로 타입이 좁혀짐
+  <Button
+    contactNumber={outerContactNumber}
+    onClick={() => {
+      onClickButton({outerContactNumber})
+    }}
+  />
+)}
+```
+
+1.	`outerContactNumber`는 `sender.contactNumber`의 값을 복사한 상수 (즉, const)
+2.	`outerContactNumber && (...)` 조건에서 `outerContactNumber`가 truthy임이 확인됨 → 즉, `outerContactNumber: string`
+3.	이후 `contactNumber={outerContactNumber}`에서 `outerContactNumber`는 `string`이므로 OK
