@@ -1,0 +1,139 @@
+---
+title: 'Type Narrow Problem in JSX'
+description: First Post
+date: '2025-5-11'
+categories:
+  - TypeScript
+published: true
+---
+
+### Control flow analysis
+
+[TypeScript: Documentation - Narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html)
+
+TypeScript의 Control Flow Analysis (제어 흐름 분석)는 코드의 실행 흐름을 분석하여 타입을 정밀하게 추론하고 더 안전한 타입 검사를 수행할 수 있게 해주는 TypeScript의 핵심 기능 중 하나이다.
+
+```typescript
+// typeof
+function printLength(x: string | number) {
+  if (typeof x === "string") {
+    console.log(x.length); // ✅ x is string here
+  } else {
+    console.log(x.toFixed(2)); // ✅ x is number here
+  }
+}
+```
+
+```typescript
+// null
+function greet(name: string | null) {
+  if (name !== null) {
+    console.log(`Hello, ${name.toUpperCase()}`); // ✅ name is string here
+  }
+}
+```
+
+```typescript
+// type guard
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
+function handle(value: unknown) {
+  if (isString(value)) {
+    console.log(value.toUpperCase()); // ✅ name is string here
+  }
+}
+```
+
+```typescript
+// in
+type Dog = { bark: () => void };
+type Cat = { meow: () => void };
+type Animal = Dog | Cat;
+
+function makeSound(animal: Animal) {
+  if ('bark' in animal) {
+    animal.bark(); // // ✅ animal is Dog here
+  } else {
+    animal.meow(); // // ✅ animal is Cat here
+  }
+}
+```
+
+이러한 제어 흐름 분석은 다음의 특징을 가진다.
+
+•	제어 흐름 분석은 함수 범위(scope) 내부에서 주로 작동한다. <br />
+•	분석 결과는 해당 블록 내부에서만 유지된다. <br />
+•	타입 정보를 직접 변경하는 타입 단언 (as)이나 any 타입은 분석을 무력화시킬 수 있다.
+
+---
+
+### 문제 상황
+
+```typescript
+type Props = {
+	sender: {
+		contactNumber: string | undefined
+	}
+}
+const Component = ({sender}: Props) => {
+	return (
+		{sender.contactNumber && (
+		  <Button
+		    contactNumber={sender.contactNumber} // contactNumber is string
+		    onClick={() => {
+			    onClickButton({
+				    contactNumber: sender.contactNumber // contactNumber is string | undefined
+			    })
+		    }
+		  />
+		)}
+	)
+}
+```
+
+`sender.contractNumber &&` 구문을 통해 `undefined`인 경우를 제거한다.
+덕분에 Button 컴포넌트의 contractNumber param의 value로 들어간 sender.contractNumber의 타입은 string으로 좁혀진 것을 확인할 수 있다.
+
+하지만 `onClick` 내부에서 사용한 `sender.contractNumber`는 지속적으로 `string | undefined` 타입을 가지고 있어 문제를 발생시킨다.
+
+이는 `sender.contactNumber &&` 구문에서 TypeScript가 흐름을 따라 타입을 좁히지만,
+객체 리터럴의 속성 값으로 들어가는 경우는 “새로운 표현식”으로 간주되기 때문에 기존의 조건을 신뢰하지 않아 발생하는 차이이다.
+새로운 표현식 내부에서는 `sender.contactNumber`의 값이 수정될 수 있다 판단하여 기존의 `type narrowing`을 적용하지 않는다.
+
+| 표현                                                       | Narrowing 적용 여부 | 이유                                       |
+| -------------------------------------------------------- | --------------- | ---------------------------------------- |
+| `<Button contactNumber={sender.contactNumber} />`        | ✅ 적용됨           | JSX prop은 && 조건문 안에서 직접 사용되므로 flow가 유지됨  |
+| `onClickButton({ contactNumber: sender.contactNumber })` | ❌ 안 됨           | 객체 속성으로 들어가면 별도의 표현식으로 평가되므로 flow 정보가 끊김 |
+
+TypeScript는 다음처럼 분석함:
+	•	sender.contactNumber && (...) → 이 자체가 하나의 표현식
+	•	JSX 자체가 표현식이기 때문에, 조건의 truthy 여부가 이 표현식 전체의 평가 조건과 1:1로 연결됨
+	•	따라서 `contactInfo={sender.contactNumber}`에서 narrowing이 유지된다
+
+하지만…
+
+함수 인자 객체의 경우:
+	•	이건 “객체 리터럴을 만들고 거기에 `sender.contactNumber`를 넣는” 별도의 표현식
+	•	이 시점에는 `sender.contactNumber`가 string | undefined 그대로임 (기존의 narrowing을 이어가지 못함)
+
+---
+
+### 해결 방법
+
+```typescript
+{sender.contactNumber && (
+	{(() => {
+		const contactNumber = sender.contactNumber // string
+		return (
+			<Button
+				contactNumber={sender.contactNumber}
+				onClick={() => {
+					onClickButton({contactNumber})
+				}
+			/>
+		)
+	})()}
+)}
+```

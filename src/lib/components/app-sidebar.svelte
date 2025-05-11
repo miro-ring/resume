@@ -42,7 +42,7 @@
 				<Sidebar.GroupLabel>
 					{#snippet child({ props })}
 						<Collapsible.Trigger {...props}>
-							Help
+							TypeScript
 							<ChevronDown
 								class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
 							/>

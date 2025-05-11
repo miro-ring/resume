@@ -16,10 +16,10 @@ const config = {
 			highlight: {
 				highlighter: async (code, lang) => {
 					const highlighter = await createHighlighter({
-						themes: ['nord'],
+						themes: ['andromeeda'],
 						langs: ['javascript', 'typescript', 'rust']
 					});
-					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'nord' }));
+					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'andromeeda' }));
 					return `{@html \`${html}\`}`;
 				}
 			}

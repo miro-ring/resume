@@ -10,7 +10,7 @@
 
 <Sidebar.Provider>
 	<AppSidebar />
-	<main class="ml-0 p-4 transition-all duration-300 data-[sidebar-open=true]:ml-64">
+	<main class="ml-0 w-full p-4 transition-all duration-300 data-[sidebar-open=true]:ml-64">
 		<Sidebar.Trigger class="mb-4" />
 		<ModeSwitcher />
 		<ModeWatcher />
