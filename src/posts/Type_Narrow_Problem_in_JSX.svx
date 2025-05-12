@@ -174,4 +174,4 @@ const outerContactNumber = sender.contactNumber // string | undefined
 
 객체의 프로퍼티는 그 특징으로 인해 getter일 수도, 중간에 값이 바뀔 수도, 재평가될 수도 있다.
 때문에 제어흐름분석에 의해 type narrowing이 수행되어도 해당 처리가 유효한 범위는 딱 1개의 depth이다.
-새로운 depth가 시작되는 경우 새로운 표현식으로 평가하며, 이 안에서는 객체의 프로퍼티에 의한 type narrowing이 유지되지 못한다. (객체의 프로퍼티는 변할 수 있다는 특징 떄문!)
+새로운 depth가 시작되는 경우 새로운 표현식으로 평가하며, 이 안에서는 객체의 프로퍼티에 의한 type narrowing이 유지되지 못한다. (객체의 프로퍼티는 변할 수 있다는 특징 때문!)
