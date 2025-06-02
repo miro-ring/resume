@@ -1,0 +1,339 @@
+---
+title: 'Which I use and see'
+description: describe some tools and articles which I usually use and see.
+date: '2025-6-2'
+categories:
+  - etc
+published: true
+---
+
+### 애플리케이션
+
+#### [Raycast](https://www.raycast.com/)
+
+mac의 Spotlight 기능을 대체하는 앱이다. `cmd + space`를 통해 모든 것을 할 수 있다.
+정말 다양한 기능이 존재하는데 그 중 자주 쓰는 기능들을 소개한다.
+
+<img src="/images/open_in_cursor.png" />
+특정 폴더를 Cursor로 열고 싶은 경우 사용한다.
+
+<img src="/images/split_view.png" />
+Raycast는 Magnet과 비슷한 화면 분할 기능을 제공한다.
+현재 24인치 모니터를 위아래로 붙인 것과 동일한 크기의 LG 듀얼업 모니터를 사용하고 있다. 화면의 세로 길이가 길어서 이를 분할해서 사용하고 싶을 때 사용한다.
+Magnet은 세로축을 3/4로 분할하는 기능이 없기 때문에 Raycase의 화면 분할 기능을 자주 사용한다.
+
+<img src="/images/open_in_safari.png" />
+애플리케이션을 실행하고 싶을 때에도 Raycast를 통해 빠르게 실행할 수 있다.
+
+<img src="/images/clipboard_history.png" />
+가끔 문서 작업을 하다보면
+브라우저에 가서 A 복사 -> 에디터에 붙여넣기 -> 다시 브라우저에 가서 B 복사 -> 에디터에 붙여넣기
+불필요한 화면 전환이 일어나는 순간이 있다. Raycast의 Clipboard History 기능을 활용하면 복사한 리스트를 관리하고 활용할 수 있다. (빠른 복붙이 가능해진다.)
+
+<img src="/images/lock_keyboard.png" />
+맥북 키패드가 너무 드러워서 물티슈로 닦고 싶을 때 사용하는 기능이다.
+해당 기능을 켜면 모든 키패드 입력이 무시된다. (ctrl + u를 통해 해제가 가능하다.) 이를 통해 키패드를 맘편히 박박 닦을 수 있다.
+
+---
+
+#### [CleanShot X](https://cleanshot.com/)
+
+해당 앱은 유료이다. 딱 한번 29 달러를 지불하면 계속해서 사용할 수 있다.
+이미지, 영상을 다루는데 큰 도움을 주는 애플리케이션이다. 일의 생산성을 높이기 위해 지불할 가치가 있다.
+정말 다양한 기능들이 있지만 내가 가장 유용하게 쓰는 기능만을 소개한다.
+
+<img src="/images/cleanshotX.png" />
+Capture history 기능이다. 문서를 작성하다보면 여러 개의 이미지를 캡쳐하는 경우가 많다. CleanShot X를 사용해 화면을 캡쳐하게 되면 캡쳐한 이미지의 리스트가 화면 한쪽에 나열된다. 덕분에 빠른 이미지 삽입이 가능해진다. (해당 애플리케이션이 없다면 매번 바탕화면에 가서 이미지를 드래그 해와야한다. 얼마나 불편한가...)
+
+<img src="/images/record_gif.png" />
+Record GIF 기능이다. 이슈를 확인하는 과정에서 화면을 녹화하는 경우가 종종 발생한다. 이때 동영상으로 캡쳐해서 첨부해도 괜찮지만 GIF 형식을 활용한다면 확인하는쪽에서 훨씬 더 쉽고 빠르게 확인이 가능해진다. CleanShot X에서는 녹화한 내용을 바로 GIF 형식으로 바꿔주는 기능이 있기에 편리하다.
+
+이외에도 이미지 편집, 스크롤 캡쳐, 영상 녹화 중 키패드 입력 및 마우스 포인터 표시 등 정말 편리한 기능들을 많이 제공하고 있다. 솔직히 29 달러가 아깝지 않다!
+
+---
+
+#### [Ice](https://github.com/jordanbaird/Ice)
+
+<img src="/images/long_icon.png" />
+시스템 트레이 영역에 아이콘이 너무 많다... (참 많이도 깔았구나!)
+노트북 화면으로 옮겨온다면 이중 일부는 노치에 의해 가려져서 보이지도 않는다. 맥북에서는 이러한 아이콘의 순서를 조절하는 기능이 없다. 때문에 별도의 애플리케이션을 통해 이를 처리해야하는데 이때 Ice 사용을 추천한다.
+
+<img src="/images/short_icon.png" />
+Ice의 기본 기능은 다음과 같다.
+- 노출될 아이콘과 가려질 아이콘을 구분할 수 있다.
+- 아이콘의 순서를 지정할 수 있다.
+- 캡쳐한 이미지처럼 배경색을 지정할 수 있다.
+
+핫키 등록을 통해 가려진 아이콘들을 빠르게 노출시킬 수도 있다. (나는 cmd +d를 통해 토글한다.)
+
+비슷한 역할을 하는 [dozer](https://github.com/Mortennn/Dozer)(무료)는 기능이 부족하고, [Bartender](https://www.macbartender.com/)(유료)는 비용에 비해 특별할게 없다. (Bartender 기능의 대부분은 Ice에도 동일하게 존재한다.)
+
+---
+
+#### [Input Source Pro](https://inputsource.pro/kr)
+
+보통의 애플리케이션들은 특정 언어를 우선적으로 사용하는 경우가 많다.
+카카오톡/카카오워크를 쓸 때는 보통 한글을, Cursor/Warp와 같이 코드 혹은 명령어를 입력하는 툴에서는 보통 영어를 우선적으로 사용하게 된다.
+
+카카오톡에 들어가서 채팅을 치는데 영어로 입력되어 지우고 다시 입력하는...
+이런 경우가 다들 한번씩은 있지 않았는가?
+Input Source Pro를 통해 이 귀찮은 상황을 해결하면 좋다.
+
+---
+
+#### [ticktick](https://ticktick.com/)
+
+<img src="/images/ticktick.png" />
+나는 정말 극단적인 P이다. 게다가 기억력도 별로 좋지 못해서 금방 까먹는 경우가 부지기수다.
+때문에 항상 TODO 리스트를 관리하기 위해 노력한다.
+내 단점을 보안하기 위해 정말 다양한 TODO 애플리케이션들을 사용해봤는데 ticktick만한게 없었다. 가장 단순하면서도 필요한 기능들을 모두 갖추고 있어 지금까지 사용하고 있다.
+(물론 내가 사용해본 애플리케이션들 중에 그나마 가장 나은거지 ticktick도 아쉬운 부분들이 많이 있다.)
+
+---
+
+#### [oslash](https://github.com/getoslash/oslash)
+
+URL ShortCut을 위한 익스텐션이다.
+북마크를 해두면 빠르게 특정 페이지로 진입할 수 있지만, oslash를 사용하면 마우스를 쓰지 않기 때문에 더 빠르게 진입이 가능하다.
+
+<img src="/images/oslash.png" />
+(모자이크도 위에서 소개한 CleanShot X의 기능이다.)
+나는 wiki, github, mail 등 자주 들어가는 URL들에 대한 숏컷을 모두 등록했다. 덕분에 빠른 페이지 전환이 가능하다.
+
+<img src="/images/oslash_move.gif" />
+
+---
+
+#### [karabiner](https://karabiner-elements.pqrs.org/)
+
+애플리케이션 간의 전환이 필요한 경우들이 있다. 이때마다 마우스를 사용하는 것은 꽤나 번잡스럽다.
+
+```json
+{
+  "profiles": [
+    {
+      "complex_modifications": {
+        "rules": [
+          {
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "1",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'arc.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "2",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'Cursor.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "3",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a '카카오워크.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "4",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'Obsidian.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "5",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'Warp.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "6",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'Melon.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "7",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'OpenLens.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "f",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'Figma.app'" }],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "k",
+                  "modifiers": { "mandatory": ["option"] }
+                },
+                "to": [{ "shell_command": "open -a 'Kakaotalk.app'" }],
+                "type": "basic"
+              }
+            ]
+          }
+        ]
+      },
+    }
+  ]
+}
+
+```
+자주 쓰는 애플리케이션들을 opt + 숫자에 매핑 해두고 사용하면 빠른 애플리케이션 전환이 가능해진다.
+
+---
+
+### CLI tools
+
+#### [bat](https://github.com/sharkdp/bat)
+
+cat의 대체제
+파일의 내용을 가독성 있게 확인할 수 있다.
+`alias cat='bat --paging=never'` 설정을 통해 cat 명령어로 활용한다.
+<img src="/images/bat.png" />
+
+---
+
+#### [lsd](https://github.com/lsd-rs/lsd)
+
+ls 대체제
+ls의 결과물이 더 깔끔하게 노출된다.
+`alias ls=lsd` 설정을 통해 ls 명령어로 활용한다.
+<img src="/images/ls.png" />
+
+---
+
+#### [zoxide](https://github.com/ajeetdsouza/zoxide)
+
+cd 대체제
+cd 명령어를 통해 이동한 폴더의 경로를 기억한다. 이후 동일한 폴더로 cd 처리를 하는 경우, 기존에 사용되었던 경로로 이동하게 된다.
+macaron으로 cd를 한적이 있기 때문에 로컬에서는 macaron의 위치가 `/Users~/macaron` 임을 알고 있다. 덕분에 어느 위치에서든 `$cd macaron` 명령어를 통해 `/Users~/macaron`으로 이동할 수 있다.
+`eval "$(zoxide init zsh --cmd cd)"` 설정을 통해 cd 명령어로 활용한다.
+<img src="/images/zoxide.png" />
+
+---
+
+### Terminal
+
+#### [warp](https://www.warp.dev/)
+
+<img src="/images/warp.png" />
+warp는 터미널을 대체하는 애플리케이션이다.
+깔끔한 UI/UX와 기본으로 제공되는 ai 기능들 또 각종 편의를 위한 핫키들이 있어 편하게 사용할 수 있다.
+
+---
+
+#### [Starship](https://starship.rs/)
+
+<img src="/images/starship.png" />
+Starship을 통해서는 터미널에 노출할 정보들을 정하고 UI를 꾸밀 수 있다.
+나는 현재시간, 경로, target branch, main branch, 수정된 파일 라인 수, 노드 버전에 대한 정보들이 노출되도록 설정했다.
+
+내가 사용하는 설정 파일이다.
+
+```toml
+format = """\
+[](bg:#030B16 fg:#7DF9AA)\
+[󰀵 ](bg:#7DF9AA fg:#090c0c)\
+[](fg:#7DF9AA bg:#1C3A5E)\
+$time\
+[](fg:#1C3A5E bg:#3B76F0)\
+$directory\
+[](fg:#3B76F0 bg:#FCF392)\
+$git_branch\
+$git_status\
+$git_metrics\
+[](fg:#FCF392 bg:#272822)\
+$fill\
+$cmd_duration $jobs $nodejs\
+$line_break\
+$character\
+"""
+
+command_timeout = 5000
+
+[directory]
+format = "[ 󰷏 $path ]($style)"
+style = "fg:#E4E4E4 bg:#3B76F0"
+
+[git_branch]
+format = '[ $symbol$branch(:$remote_branch) ]($style)'
+symbol = "  "
+style = "fg:#1C3A5E bg:#FCF392"
+
+[git_status]
+format = '[$all_status]($style)'
+style = "fg:#1C3A5E bg:#FCF392"
+
+[git_metrics]
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "fg:#1C3A5E bg:#FCF392"
+deleted_style = "fg:bright-red bg:235"
+disabled = false
+
+[hg_branch]
+format = "[ $symbol$branch ]($style)"
+symbol = " "
+
+[character]
+success_symbol = '[ ➜](bold green) '
+error_symbol = '[ ✗](#E84D44) '
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
+
+[fill]
+symbol=' '
+
+[nodejs]
+format = '[ $symbol($version )]($style)'
+```
+
+---
+
+### Articles
+
+[GeekNews - 개발/기술/스타트업 뉴스 서비스](https://news.hada.io/)
+
+[Korean FE article \| Han Jung(한정) \| Substack](https://kofearticle.substack.com/)
+
+[데브필 DevPill](https://maily.so/devpill?mid=3jrk9wxw5z5)
+
+[Commits \| 김욱영 \| Substack](https://www.commits.world/)
+
+<br />
+
+[ECMAScript News: Stay up-to-date on JavaScript and tools.](https://ecmascript.news/)
+> ECMAScript의 변경 사항들을 소개해줌
+
+[1페이지 \| OTW for FE](https://ones-to-watch.ethansup.net/news/list/1)
+> 1주일마다 FE 뉴스들을 모아서 보여줌
+
+[FE News \| Substack](https://fenews.substack.com/)
+> naver fe news
+
+[divercity \| Hyungsuk Kim \| Substack](https://divercitystory.substack.com/)
+> 일과 관련한 가치관에 대한 글들. 개인적으로 가장 재미있게 읽고 있는 저자
+
+구독해서 보는 아티클들이다. 맨 아래의 divercity는 특히 추천한다.
