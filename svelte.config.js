@@ -17,7 +17,18 @@ const config = {
 				highlighter: async (code, lang) => {
 					const highlighter = await createHighlighter({
 						themes: ['andromeeda'],
-						langs: ['javascript', 'typescript', 'rust', 'toml']
+						langs: [
+							'javascript',
+							'typescript',
+							'rust',
+							'toml',
+							'bash',
+							'json',
+							'yaml',
+							'css',
+							'html',
+							'markdown'
+						]
 					});
 					const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'andromeeda' }));
 					return `{@html \`${html}\`}`;
