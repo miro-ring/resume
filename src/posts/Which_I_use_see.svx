@@ -106,6 +106,14 @@ URL ShortCut을 위한 익스텐션이다.
 
 ---
 
+#### [Homerow](https://www.homerow.app/)
+<img src="/images/homerow.png" />
+키보드에서 마우스까지 손을 움직이고 싶지 않을 때 사용하는 툴. <br />
+지정된 핫키를 입력하면 clickable한 모든 요소에 대해 단축키가 생긴다. 해당 단축키를 입력하고 return하면 해당 요소가 클릭된다. <br />
+유료 애플리케이션이지만 라이센스 구매 없이도 사용이 가능하다. 50번 실행할 때마다 하단에 구매를 유도하는 메시지가 나타난다고 하는데 끄면 된다.
+
+---
+
 #### [karabiner](https://karabiner-elements.pqrs.org/)
 
 애플리케이션 간의 전환이 필요한 경우들이 있다. 이때마다 마우스를 사용하는 것은 꽤나 번잡스럽다.
@@ -322,8 +330,6 @@ format = '[ $symbol($version )]($style)'
 
 [데브필 DevPill](https://maily.so/devpill?mid=3jrk9wxw5z5)
 
-[Commits \| 김욱영 \| Substack](https://www.commits.world/)
-
 <br />
 
 [ECMAScript News: Stay up-to-date on JavaScript and tools.](https://ecmascript.news/)
@@ -335,7 +341,10 @@ format = '[ $symbol($version )]($style)'
 [FE News \| Substack](https://fenews.substack.com/)
 > naver fe news
 
+[Commits \| 김욱영 \| Substack](https://www.commits.world/)
+> 다양한 분야의 내용을 소개해주는 글
+
 [divercity \| Hyungsuk Kim \| Substack](https://divercitystory.substack.com/)
-> 일과 관련한 가치관에 대한 글들. 개인적으로 가장 재미있게 읽고 있는 저자
+> 일과 관련한 가치관에 대한 글들. 개인적으로 가장 재미있게 읽고 있는 저자 (이유는 모르겠는데 항상 1일 1글을 하시던 분인데 요즘에는 글이 올라오지 않는다.)
 
 구독해서 보는 아티클들이다. 맨 아래의 divercity는 특히 추천한다.
