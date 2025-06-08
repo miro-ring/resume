@@ -7,11 +7,25 @@
 	import type { Post } from '../../types';
 
 	let posts: Post[] = [];
+	let categorizedPosts: Record<string, Post[]> = {};
 
 	onMount(async () => {
 		const res = await fetch('/api/posts');
 		const data = await res.json();
-		posts = data.filter((post: Post) => post.published); // 필요시 published 필터
+		posts = data.filter((post: Post) => post.published);
+
+		// 카테고리별로 포스트 그룹화
+		categorizedPosts = posts.reduce(
+			(acc, post) => {
+				const category = post.categories[0] || '기타';
+				if (!acc[category]) {
+					acc[category] = [];
+				}
+				acc[category].push(post);
+				return acc;
+			},
+			{} as Record<string, Post[]>
+		);
 	});
 
 	const openPost = (slug: string) => {
@@ -37,37 +51,40 @@
 				</Sidebar.MenuItem>
 			</Sidebar.Menu>
 		</Sidebar.Group>
-		<Collapsible.Root class="group/collapsible">
-			<Sidebar.Group>
-				<Sidebar.GroupLabel>
-					{#snippet child({ props })}
-						<Collapsible.Trigger {...props}>
-							TypeScript
-							<ChevronDown
-								class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
-							/>
-						</Collapsible.Trigger>
-					{/snippet}
-				</Sidebar.GroupLabel>
-				<Collapsible.Content>
-					<Sidebar.GroupContent>
-						<Sidebar.Menu>
-							{#each posts as post}
-								<Sidebar.MenuItem>
-									<Sidebar.MenuButton size="sm" class="ml-1">
-										<button
-											class="w-full text-left hover:underline"
-											on:click={() => openPost(post.slug || '')}
-										>
-											{post.title}
-										</button>
-									</Sidebar.MenuButton>
-								</Sidebar.MenuItem>
-							{/each}
-						</Sidebar.Menu>
-					</Sidebar.GroupContent>
-				</Collapsible.Content>
-			</Sidebar.Group>
-		</Collapsible.Root>
+
+		{#each Object.entries(categorizedPosts) as [category, categoryPosts]}
+			<Collapsible.Root class="group/collapsible">
+				<Sidebar.Group>
+					<Sidebar.GroupLabel>
+						{#snippet child({ props })}
+							<Collapsible.Trigger {...props}>
+								{category}
+								<ChevronDown
+									class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
+								/>
+							</Collapsible.Trigger>
+						{/snippet}
+					</Sidebar.GroupLabel>
+					<Collapsible.Content>
+						<Sidebar.GroupContent>
+							<Sidebar.Menu>
+								{#each categoryPosts as post}
+									<Sidebar.MenuItem>
+										<Sidebar.MenuButton size="sm" class="ml-1">
+											<button
+												class="w-full text-left hover:underline"
+												on:click={() => openPost(post.slug || '')}
+											>
+												{post.title}
+											</button>
+										</Sidebar.MenuButton>
+									</Sidebar.MenuItem>
+								{/each}
+							</Sidebar.Menu>
+						</Sidebar.GroupContent>
+					</Collapsible.Content>
+				</Sidebar.Group>
+			</Collapsible.Root>
+		{/each}
 	</Sidebar.Content>
 </Sidebar.Root>
