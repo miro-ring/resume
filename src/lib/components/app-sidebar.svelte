@@ -9,6 +9,23 @@
 	let posts: Post[] = [];
 	let categorizedPosts: Record<string, Post[]> = {};
 
+	// 카테고리 우선순위 정의
+	const categoryPriority: Record<string, number> = {
+		TypeScript: 1,
+		'Book Review': 2,
+		기타: 3
+	};
+
+	// 카테고리 정렬 함수
+	const sortCategories = (categories: Record<string, Post[]>) => {
+		const sortedEntries = Object.entries(categories).sort(([a], [b]) => {
+			const priorityA = categoryPriority[a] || 999; // 우선순위가 없는 카테고리는 마지막
+			const priorityB = categoryPriority[b] || 999;
+			return priorityA - priorityB;
+		});
+		return Object.fromEntries(sortedEntries);
+	};
+
 	onMount(async () => {
 		const res = await fetch('/api/posts');
 		const data = await res.json();
@@ -26,6 +43,9 @@
 			},
 			{} as Record<string, Post[]>
 		);
+
+		// 카테고리 우선순위에 따라 정렬
+		categorizedPosts = sortCategories(categorizedPosts);
 	});
 
 	const openPost = (slug: string) => {
@@ -55,7 +75,7 @@
 		{#each Object.entries(categorizedPosts) as [category, categoryPosts]}
 			<Collapsible.Root class="group/collapsible">
 				<Sidebar.Group>
-					<Sidebar.GroupLabel>
+					<Sidebar.GroupLabel class="h-6">
 						{#snippet child({ props })}
 							<Collapsible.Trigger {...props}>
 								{category}
@@ -65,7 +85,7 @@
 							</Collapsible.Trigger>
 						{/snippet}
 					</Sidebar.GroupLabel>
-					<Collapsible.Content>
+					<Collapsible.Content class="mt-2">
 						<Sidebar.GroupContent>
 							<Sidebar.Menu>
 								{#each categoryPosts as post}
