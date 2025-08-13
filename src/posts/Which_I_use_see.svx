@@ -347,6 +347,12 @@ format = '[ $symbol($version )]($style)'
 [트렌드림](https://page.stibee.com/subscriptions/41037?groupIds=96898)
 > 다양한 종류의 재미난 글들이 정말 많다.
 
+[blog by ash](https://blogbyash.com)
+> 좋은 글들에 대한 번역본들이 많다.
+
+[NEWNEEK](https://newneek.co/)
+> 다양한 시사 정보들
+
 [divercity \| Hyungsuk Kim \| Substack](https://divercitystory.substack.com/)
 > 일과 관련한 가치관에 대한 글들. 개인적으로 가장 재미있게 읽고 있는 저자 (이유는 모르겠는데 항상 1일 1글을 하시던 분인데 요즘에는 글이 올라오지 않는다.)
 
