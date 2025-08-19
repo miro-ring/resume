@@ -13,6 +13,8 @@ published: true
 
 사용하기 좋은 깔끔한 브라우저
 
+---
+
 #### [Raycast](https://www.raycast.com/)
 
 mac의 Spotlight 기능을 대체하는 앱이다. `cmd + space`를 통해 모든 것을 할 수 있다.
