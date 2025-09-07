@@ -28,7 +28,9 @@ published: true
 #### SEO에서 GEO, AEO로
 
 이러한 흐름에 맞추어 SEO의 개념도 변하고 있다. 단순히 키워드와 알고리즘 최적화에 그치지 않고, GEO(Generative Engine Optimization) 와 AEO(Answer Engine Optimization) 라는 새로운 접근이 주목받고 있다.
+
 	•	GEO는 생성형 엔진이 웹사이트의 콘텐츠를 학습하고 더 잘 활용할 수 있도록 최적화하는 전략이다. 단순히 검색엔진의 크롤링을 고려하는 것이 아니라, AI가 콘텐츠의 맥락을 이해하고 정답으로 제시할 수 있도록 구조화된 데이터와 문맥적 풍부함을 제공해야 한다.
+
 	•	AEO는 사용자가 질문했을 때, AI가 특정 브랜드나 서비스를 ‘답변’의 형태로 직접 노출하게끔 하는 최적화 방식이다. 이는 단순한 검색 상위 노출이 아니라, ‘AI의 답변’ 그 자체에 포함되는 것을 목표로 한다는 점에서 새로운 차원의 경쟁이다.
 
 ---
@@ -52,9 +54,14 @@ published: true
 ---
 
 #### 참고문헌
-생성형 엔진 최적화(GEO), 검색의 규칙을 어떻게 바꾸는가 \| GeekNews](https://news.hada.io/topic?id=21260)
+[생성형 엔진 최적화(GEO), 검색의 규칙을 어떻게 바꾸는가 | GeekNews](https://news.hada.io/topic?id=21260)
+
 [대기업 검색출처 10위에 대형언론사는 하나도 없었다](https://www.youtube.com/watch?v=vhWBSTf01Kk)
+
 [웹 브라우저 장악하면 AI에이전트 장악한다 - YouTube](https://www.youtube.com/watch?v=VaKwaaTpgvI)
+
 [오픈AI는 왜 웹 브라우저를 만드는가](https://digitalbourgeois.tistory.com/1609)
+
 [챗GPT, 5년 뒤엔 구글 검색 이긴다.](https://zdnet.co.kr/view/?no=20250828073021)
+
 [브랜드-인플루언서 연합이 대세](https://www.dailian.co.kr/news/view/1539190/?sc=Naver)
