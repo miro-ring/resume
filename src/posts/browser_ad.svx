@@ -55,13 +55,13 @@ published: true
 
 #### 참고문헌
 [생성형 엔진 최적화(GEO), 검색의 규칙을 어떻게 바꾸는가 | GeekNews](https://news.hada.io/topic?id=21260)
-<br />
+
 [대기업 검색출처 10위에 대형언론사는 하나도 없었다](https://www.youtube.com/watch?v=vhWBSTf01Kk)
-<br />
+
 [웹 브라우저 장악하면 AI에이전트 장악한다 - YouTube](https://www.youtube.com/watch?v=VaKwaaTpgvI)
-<br />
+
 [오픈AI는 왜 웹 브라우저를 만드는가](https://digitalbourgeois.tistory.com/1609)
-<br />
+
 [챗GPT, 5년 뒤엔 구글 검색 이긴다.](https://zdnet.co.kr/view/?no=20250828073021)
-<br />
+
 [브랜드-인플루언서 연합이 대세](https://www.dailian.co.kr/news/view/1539190/?sc=Naver)
