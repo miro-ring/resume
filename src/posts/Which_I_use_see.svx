@@ -248,6 +248,13 @@ macaron으로 cd를 한적이 있기 때문에 로컬에서는 macaron의 위치
 
 ---
 
+#### [httpie](https://httpie.io/docs/cli/installation)
+
+curl의 대체제
+결과의 포맷팅이나 다양한 옵션들이 활용해보기 좋다.
+
+---
+
 ### Terminal
 
 #### [warp](https://www.warp.dev/)
