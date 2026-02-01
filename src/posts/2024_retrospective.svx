@@ -3,7 +3,7 @@ title: '2024 회고'
 description: My retrospective of 2024.
 date: '2025-8-4'
 categories:
-  - etc
+  - 회고
 published: true
 ---
 

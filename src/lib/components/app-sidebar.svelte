@@ -80,12 +80,12 @@
 							<Collapsible.Trigger {...props}>
 								{category}
 								<ChevronDown
-									class="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-180"
+									class="ml-auto transition-transform duration-300 ease-in-out group-data-[state=open]/collapsible:rotate-180"
 								/>
 							</Collapsible.Trigger>
 						{/snippet}
 					</Sidebar.GroupLabel>
-					<Collapsible.Content class="mt-2">
+					<Collapsible.Content class="mt-2 overflow-hidden data-[state=closed]:animate-collapse-up data-[state=open]:animate-collapse-down">
 						<Sidebar.GroupContent>
 							<Sidebar.Menu>
 								{#each categoryPosts as post}
