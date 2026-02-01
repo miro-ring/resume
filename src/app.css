@@ -120,4 +120,21 @@
 	.prose h3 {
 		@apply scroll-mt-20;
 	}
+
+	/* 하이라이트 스타일 */
+	.highlight-mark {
+		@apply cursor-pointer rounded-sm bg-yellow-200 transition-colors;
+	}
+
+	.dark .highlight-mark {
+		@apply bg-yellow-300/80;
+	}
+
+	.highlight-mark:hover {
+		@apply bg-yellow-300;
+	}
+
+	.dark .highlight-mark:hover {
+		@apply bg-yellow-300/90;
+	}
 }
