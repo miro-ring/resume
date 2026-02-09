@@ -90,6 +90,10 @@ const config: Config = {
 				'collapse-up': {
 					from: { height: 'var(--bits-collapsible-content-height)', opacity: '1' },
 					to: { height: '0', opacity: '0' }
+				},
+				'fade-in': {
+					from: { opacity: '0' },
+					to: { opacity: '1' }
 				}
 			},
 			animation: {
@@ -97,7 +101,8 @@ const config: Config = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'caret-blink': 'caret-blink 1.25s ease-out infinite',
 				'collapse-down': 'collapse-down 0.3s ease-out',
-				'collapse-up': 'collapse-up 0.3s ease-out'
+				'collapse-up': 'collapse-up 0.3s ease-out',
+				'fade-in': 'fade-in 0.6s ease-out forwards'
 			}
 		}
 	},
