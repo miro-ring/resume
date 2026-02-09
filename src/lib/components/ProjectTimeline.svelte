@@ -115,8 +115,10 @@
 			gsap.fromTo(detailEl, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
 		});
 
+		window.addEventListener('keydown', handleKeydown, { capture: true });
 		containerEl.addEventListener('wheel', handleWheel, { passive: false });
 		return () => {
+			window.removeEventListener('keydown', handleKeydown, { capture: true });
 			containerEl.removeEventListener('wheel', handleWheel);
 		};
 	});
@@ -128,8 +130,6 @@
 	class="flex flex-1 flex-col"
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
-	onkeydown={handleKeydown}
-	tabindex="0"
 	role="region"
 	aria-label="프로젝트 타임라인"
 >
