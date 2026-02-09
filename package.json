@@ -47,6 +47,7 @@
 		"shiki": "^3.3.0"
 	},
 	"dependencies": {
+		"gsap": "^3.14.2",
 		"mode-watcher": "0.5.1"
 	}
 }
