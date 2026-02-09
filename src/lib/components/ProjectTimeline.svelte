@@ -1,0 +1,195 @@
+<script lang="ts">
+	import { projects } from '$lib/data/projects';
+	import { onMount } from 'svelte';
+	import { getGsap } from '$lib/utils/gsap';
+	import ProjectDetail from './ProjectDetail.svelte';
+	import TimelineDot from './TimelineDot.svelte';
+
+	const ITEMS_PER_ROW = 5;
+
+	let { onGoBack = () => {} }: { onGoBack?: () => void } = $props();
+
+	let activeIndex = $state(0);
+	let isAnimating = $state(false);
+	let detailEl: HTMLDivElement;
+	let containerEl: HTMLDivElement;
+	let gsap: Awaited<ReturnType<typeof getGsap>>;
+	let prefersReduced = false;
+
+	const activeProject = $derived(projects[activeIndex]);
+	const rows = $derived(
+		Array.from({ length: Math.ceil(projects.length / ITEMS_PER_ROW) }, (_, i) =>
+			projects.slice(i * ITEMS_PER_ROW, (i + 1) * ITEMS_PER_ROW)
+		)
+	);
+
+	function goTo(index: number) {
+		if (index === activeIndex || isAnimating || index < 0 || index >= projects.length) return;
+
+		if (prefersReduced) {
+			activeIndex = index;
+			return;
+		}
+
+		isAnimating = true;
+		gsap.to(detailEl, {
+			opacity: 0,
+			y: -8,
+			duration: 0.2,
+			ease: 'power2.in',
+			onComplete: () => {
+				activeIndex = index;
+				gsap.fromTo(
+					detailEl,
+					{ opacity: 0, y: 8 },
+					{
+						opacity: 1,
+						y: 0,
+						duration: 0.3,
+						ease: 'power2.out',
+						onComplete: () => {
+							isAnimating = false;
+						}
+					}
+				);
+			}
+		});
+	}
+
+	function handleWheel(e: WheelEvent) {
+		e.preventDefault();
+		if (isAnimating) return;
+
+		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+		if (Math.abs(delta) < 10) return;
+
+		if (delta > 0) {
+			goTo(activeIndex + 1);
+		} else {
+			if (activeIndex === 0) {
+				onGoBack();
+			} else {
+				goTo(activeIndex - 1);
+			}
+		}
+	}
+
+	let touchStartX = 0;
+	function handleTouchStart(e: TouchEvent) {
+		touchStartX = e.touches[0].clientX;
+	}
+
+	function handleTouchEnd(e: TouchEvent) {
+		const dx = e.changedTouches[0].clientX - touchStartX;
+		if (Math.abs(dx) < 50) return;
+		if (dx < 0) {
+			goTo(activeIndex + 1);
+		} else {
+			if (activeIndex === 0) {
+				onGoBack();
+			} else {
+				goTo(activeIndex - 1);
+			}
+		}
+	}
+
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+			e.preventDefault();
+			goTo(activeIndex + 1);
+		} else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+			e.preventDefault();
+			if (activeIndex === 0) {
+				onGoBack();
+			} else {
+				goTo(activeIndex - 1);
+			}
+		}
+	}
+
+	onMount(() => {
+		prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		getGsap().then((g) => {
+			gsap = g;
+			gsap.fromTo(detailEl, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+		});
+
+		containerEl.addEventListener('wheel', handleWheel, { passive: false });
+		return () => {
+			containerEl.removeEventListener('wheel', handleWheel);
+		};
+	});
+</script>
+
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<div
+	bind:this={containerEl}
+	class="flex flex-1 flex-col"
+	ontouchstart={handleTouchStart}
+	ontouchend={handleTouchEnd}
+	onkeydown={handleKeydown}
+	tabindex="0"
+	role="region"
+	aria-label="프로젝트 타임라인"
+>
+	<!-- Detail panel -->
+	<div bind:this={detailEl} class="flex flex-1 justify-center overflow-y-auto px-4 pt-[15vh]">
+		{#key activeProject.name}
+			<ProjectDetail project={activeProject} />
+		{/key}
+	</div>
+
+	<!-- S-shaped Timeline -->
+	<nav class="shrink-0 px-6 pb-12 pt-2" aria-label="타임라인 네비게이션">
+		{#each rows as row, rowIndex}
+			{@const isEven = rowIndex % 2 === 0}
+			{@const isReversed = !isEven}
+			{@const textAbove = isEven}
+			{@const hasNext = rowIndex < rows.length - 1}
+			{@const hasPrev = rowIndex > 0}
+			{@const trimRight = (hasNext && isEven) || (hasPrev && (rowIndex - 1) % 2 === 0)}
+			{@const trimLeft = (hasNext && !isEven) || (hasPrev && (rowIndex - 1) % 2 !== 0)}
+
+			<!-- Row -->
+			<div class="relative flex items-start justify-between" class:flex-row-reverse={isReversed}>
+				<!-- Horizontal line -->
+				{#if textAbove}
+					<div
+						class="absolute bottom-[8px] h-0.5 bg-border"
+						class:right-0={!trimRight} class:right-6={trimRight}
+						class:left-0={!trimLeft} class:left-6={trimLeft}
+					></div>
+				{:else}
+					<div
+						class="absolute top-[8px] h-0.5 bg-border"
+						class:right-0={!trimRight} class:right-6={trimRight}
+						class:left-0={!trimLeft} class:left-6={trimLeft}
+					></div>
+				{/if}
+
+				{#each row as project, i}
+					{@const globalIndex = rowIndex * ITEMS_PER_ROW + i}
+					<TimelineDot {project} {textAbove} isActive={globalIndex === activeIndex} onclick={() => goTo(globalIndex)} />
+				{/each}
+			</div>
+
+			<!-- Rounded connector between rows -->
+			{#if hasNext}
+				<div
+					class="pointer-events-none -my-[10px] flex"
+					class:justify-end={isEven}
+					class:justify-start={!isEven}
+				>
+					<div
+						class="h-20 w-8 border-y-2 border-border"
+						class:border-r-2={isEven}
+						class:rounded-r-3xl={isEven}
+						class:border-l-2={!isEven}
+						class:rounded-l-3xl={!isEven}
+					></div>
+				</div>
+			{/if}
+		{/each}
+	</nav>
+</div>
