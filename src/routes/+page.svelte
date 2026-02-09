@@ -109,7 +109,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div
-	class="-m-4 h-dvh overflow-hidden p-6"
+	class="-m-4 h-dvh overflow-hidden p-6 focus:outline-none"
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
 	onkeydown={handleKeydown}
