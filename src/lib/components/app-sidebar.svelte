@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ChevronDown } from '@lucide/svelte';
+	import { ChevronDown, Github } from '@lucide/svelte';
 	import * as Sidebar from '$lib/components/ui/sidebar/index.js';
 	import * as Collapsible from '$lib/components/ui/collapsible/index.js';
 	import { onMount } from 'svelte';
@@ -107,4 +107,14 @@
 			</Collapsible.Root>
 		{/each}
 	</Sidebar.Content>
+	<Sidebar.Footer>
+		<a
+			href="https://github.com/miro-ring"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="mx-4 mb-2 flex size-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground"
+		>
+			<Github class="size-3.5" />
+		</a>
+	</Sidebar.Footer>
 </Sidebar.Root>
