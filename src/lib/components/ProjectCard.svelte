@@ -27,11 +27,11 @@
 		<p class="text-sm text-muted-foreground">{formatPeriod()}</p>
 	</div>
 
-	<ul class="space-y-2 pl-5 text-foreground">
+	<div class="space-y-2 text-foreground">
 		{#each project.description as item}
-			<li class="leading-relaxed">{item}</li>
+			<p class="leading-loose">{item}</p>
 		{/each}
-	</ul>
+	</div>
 
 	<div class="flex flex-wrap gap-2 pt-2">
 		{#each project.techStack as tech}

@@ -18,14 +18,11 @@
 		<h3 class="text-2xl font-bold leading-tight">{project.name}</h3>
 	</div>
 
-	<ul class="space-y-2 text-[15px] leading-relaxed text-muted-foreground">
+	<div class="space-y-2 text-[15px] leading-loose text-muted-foreground">
 		{#each project.description as item}
-			<li class="flex items-baseline gap-2">
-				<span class="block h-1.5 w-1.5 shrink-0 translate-y-[-1px] rounded-full bg-primary/50"></span>
-				<span>{item}</span>
-			</li>
+			<p>{item}</p>
 		{/each}
-	</ul>
+	</div>
 
 	{#if project.techStack?.length}
 		<div class="flex flex-wrap gap-2 pt-1">
