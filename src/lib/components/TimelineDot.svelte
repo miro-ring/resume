@@ -7,8 +7,9 @@
 		project,
 		isActive,
 		onclick,
-		textAbove = false
-	}: { project: Project; isActive: boolean; onclick: () => void; textAbove?: boolean } = $props();
+		textAbove = false,
+		isMobile = false
+	}: { project: Project; isActive: boolean; onclick: () => void; textAbove?: boolean; isMobile?: boolean } = $props();
 
 	let dotEl: HTMLButtonElement;
 
@@ -43,15 +44,17 @@
 	aria-current={isActive ? 'step' : undefined}
 >
 	<span
-		class="relative z-10 block h-4 w-4 rounded-full border-2 transition-colors {!textAbove ? 'mt-1' : ''}
+		class="relative z-10 block h-4 w-4 rounded-full border-2 transition-colors
 		{isActive
 			? 'border-primary bg-primary'
 			: 'border-muted-foreground/50 bg-background group-hover:border-primary/70'}"
 	></span>
-	<span class="text-xs font-medium whitespace-nowrap {isActive ? 'text-primary' : 'text-muted-foreground'}">
+	<span class="max-w-[80px] truncate text-[10px] font-medium sm:max-w-none sm:overflow-visible sm:text-clip sm:whitespace-nowrap sm:text-xs {isActive ? 'text-primary' : 'text-muted-foreground'}">
 		{project.name}
 	</span>
-	<span class="text-[10px] whitespace-nowrap {isActive ? 'text-foreground' : 'text-muted-foreground/70'}">
-		{formatPeriod(project.period)}
-	</span>
+	{#if !isMobile}
+		<span class="text-[10px] whitespace-nowrap {isActive ? 'text-foreground' : 'text-muted-foreground/70'}">
+			{formatPeriod(project.period)}
+		</span>
+	{/if}
 </button>

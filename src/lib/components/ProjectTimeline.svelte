@@ -5,21 +5,22 @@
 	import ProjectDetail from './ProjectDetail.svelte';
 	import TimelineDot from './TimelineDot.svelte';
 
-	const ITEMS_PER_ROW = 5;
-
 	let { onGoBack = () => {} }: { onGoBack?: () => void } = $props();
 
 	let activeIndex = $state(0);
 	let isAnimating = $state(false);
+	let isMobile = $state(false);
 	let detailEl: HTMLDivElement;
 	let containerEl: HTMLDivElement;
 	let gsap: Awaited<ReturnType<typeof getGsap>>;
 	let prefersReduced = false;
 
+	const itemsPerRow = $derived(isMobile ? 3 : 5);
+
 	const activeProject = $derived(projects[activeIndex]);
 	const rows = $derived(
-		Array.from({ length: Math.ceil(projects.length / ITEMS_PER_ROW) }, (_, i) =>
-			projects.slice(i * ITEMS_PER_ROW, (i + 1) * ITEMS_PER_ROW)
+		Array.from({ length: Math.ceil(projects.length / itemsPerRow) }, (_, i) =>
+			projects.slice(i * itemsPerRow, (i + 1) * itemsPerRow)
 		)
 	);
 
@@ -110,6 +111,11 @@
 	onMount(() => {
 		prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+		const mql = window.matchMedia('(max-width: 640px)');
+		isMobile = mql.matches;
+		const handleResize = (e: MediaQueryListEvent) => { isMobile = e.matches; };
+		mql.addEventListener('change', handleResize);
+
 		getGsap().then((g) => {
 			gsap = g;
 			gsap.fromTo(detailEl, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
@@ -118,6 +124,7 @@
 		window.addEventListener('keydown', handleKeydown, { capture: true });
 		containerEl.addEventListener('wheel', handleWheel, { passive: false });
 		return () => {
+			mql.removeEventListener('change', handleResize);
 			window.removeEventListener('keydown', handleKeydown, { capture: true });
 			containerEl.removeEventListener('wheel', handleWheel);
 		};
@@ -134,14 +141,14 @@
 	aria-label="프로젝트 타임라인"
 >
 	<!-- Detail panel -->
-	<div bind:this={detailEl} class="flex flex-1 justify-center overflow-y-auto px-4 pt-[15vh]">
+	<div bind:this={detailEl} class="flex flex-1 justify-center overflow-y-auto px-4 pt-[6vh] sm:pt-[15vh]">
 		{#key activeProject.name}
 			<ProjectDetail project={activeProject} />
 		{/key}
 	</div>
 
 	<!-- S-shaped Timeline -->
-	<nav class="shrink-0 px-6 pb-12 pt-2" aria-label="타임라인 네비게이션">
+	<nav class="shrink-0 px-2 pb-6 pt-2 sm:px-6 sm:pb-12" aria-label="타임라인 네비게이션">
 		{#each rows as row, rowIndex}
 			{@const isEven = rowIndex % 2 === 0}
 			{@const isReversed = !isEven}
@@ -169,8 +176,8 @@
 				{/if}
 
 				{#each row as project, i}
-					{@const globalIndex = rowIndex * ITEMS_PER_ROW + i}
-					<TimelineDot {project} {textAbove} isActive={globalIndex === activeIndex} onclick={() => goTo(globalIndex)} />
+					{@const globalIndex = rowIndex * itemsPerRow + i}
+					<TimelineDot {project} {textAbove} {isMobile} isActive={globalIndex === activeIndex} onclick={() => goTo(globalIndex)} />
 				{/each}
 			</div>
 
@@ -182,7 +189,7 @@
 					class:justify-start={!isEven}
 				>
 					<div
-						class="h-20 w-8 border-y-2 border-border"
+						class="h-12 w-6 border-y-2 border-border sm:h-20 sm:w-8"
 						class:border-r-2={isEven}
 						class:rounded-r-3xl={isEven}
 						class:border-l-2={!isEven}

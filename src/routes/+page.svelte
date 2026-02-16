@@ -109,7 +109,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div
-	class="-m-4 h-dvh overflow-hidden p-6 focus:outline-none"
+	class="-m-4 h-dvh overflow-hidden p-4 focus:outline-none sm:p-6"
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
 	onkeydown={handleKeydown}
@@ -121,8 +121,8 @@
 		class="flex h-full flex-col items-center justify-center gap-4 pb-[20vh] text-center"
 	>
 		<p class="text-sm font-medium tracking-widest text-muted-foreground uppercase">Portfolio</p>
-		<h1 class="text-5xl font-bold tracking-tight">FE 개발자 장동균입니다.</h1>
-		<p class="mt-2 text-lg text-muted-foreground">
+		<h1 class="text-3xl font-bold tracking-tight sm:text-5xl">FE 개발자 장동균입니다.</h1>
+		<p class="mt-2 text-base text-muted-foreground sm:text-lg">
 			저에 대해 더 알고 싶다면 스크롤을 해주세요.
 		</p>
 		<div class="mt-6 animate-bounce text-muted-foreground/50">
