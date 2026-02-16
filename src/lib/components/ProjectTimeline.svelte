@@ -159,7 +159,7 @@
 			{@const trimLeft = (hasNext && !isEven) || (hasPrev && (rowIndex - 1) % 2 !== 0)}
 
 			<!-- Row -->
-			<div class="relative flex items-start justify-between" class:flex-row-reverse={isReversed}>
+			<div class="relative z-10 flex items-start justify-between" class:flex-row-reverse={isReversed}>
 				<!-- Horizontal line -->
 				{#if textAbove}
 					<div
@@ -175,6 +175,7 @@
 					></div>
 				{/if}
 
+
 				{#each row as project, i}
 					{@const globalIndex = rowIndex * itemsPerRow + i}
 					<TimelineDot {project} {textAbove} {isMobile} isActive={globalIndex === activeIndex} onclick={() => goTo(globalIndex)} />
@@ -184,12 +185,12 @@
 			<!-- Rounded connector between rows -->
 			{#if hasNext}
 				<div
-					class="pointer-events-none -my-[10px] flex"
+					class="pointer-events-none relative z-0 flex {isEven ? '-my-[10px]' : '-my-[27px] sm:-my-[10px]'}"
 					class:justify-end={isEven}
 					class:justify-start={!isEven}
 				>
 					<div
-						class="h-12 w-6 border-y-2 border-border sm:h-20 sm:w-8"
+						class="w-6 border-y-2 border-border sm:h-20 sm:w-8 {isEven ? 'h-12' : 'h-[82px]'}"
 						class:border-r-2={isEven}
 						class:rounded-r-3xl={isEven}
 						class:border-l-2={!isEven}

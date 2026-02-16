@@ -44,7 +44,6 @@
 		e.preventDefault();
 		e.stopPropagation();
 		isPulling = true;
-		hasInteracted = true;
 		pullY = dy / 2.5;
 	}
 
@@ -66,9 +65,11 @@
 				setTimeout(() => {
 					isRefreshing = false;
 					pullY = 0;
+					hasInteracted = true;
 				}, 1500);
 			} else {
 				pullY = 0;
+				hasInteracted = true;
 			}
 		});
 	}
@@ -115,7 +116,16 @@
 	role="presentation"
 	style="cursor: {isPulling ? 'grabbing' : 'grab'};"
 >
-	<!-- Spinner -->
+	<!-- Hint (before interaction) -->
+	<div class="grid transition-all duration-300 {hasInteracted ? 'grid-rows-[0fr]' : 'grid-rows-[1fr]'}">
+		<div class="overflow-hidden">
+			<p class="pointer-events-none mb-3 text-center text-xs text-muted-foreground/40 transition-opacity duration-200 {isPulling || isRefreshing || hasInteracted ? 'opacity-0' : ''}">
+				<span class="inline-block animate-bounce">↓</span> 당겨서 체험해보세요
+			</p>
+		</div>
+	</div>
+
+	<!-- Spinner (during/after interaction) -->
 	<div
 		class="pointer-events-none absolute inset-x-0 flex justify-center"
 		style="top: {Math.min(pullY - 36, 16)}px; opacity: {Math.min(pullY / 40, 1)}; transition: {transition};"
@@ -132,12 +142,6 @@
 	<!-- Content -->
 	<div style="transform: translateY({pullY}px); transition: {transition};">
 		{@render children()}
-
-		{#if !hasInteracted}
-			<p class="mt-6 text-center text-xs text-muted-foreground/40">
-				<span class="inline-block animate-bounce">↓</span> 당겨서 체험해보세요
-			</p>
-		{/if}
 	</div>
 </div>
 
