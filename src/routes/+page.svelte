@@ -109,7 +109,7 @@
 
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div
-	class="-m-4 h-dvh overflow-hidden p-4 focus:outline-none sm:p-6"
+	class="-m-2 sm:-m-4 h-dvh overflow-hidden p-2 focus:outline-none sm:p-6"
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
 	onkeydown={handleKeydown}
@@ -118,7 +118,7 @@
 	<!-- Intro -->
 	<div
 		bind:this={introEl}
-		class="flex h-full flex-col items-center justify-center gap-4 pb-[20vh] text-center"
+		class="flex h-full touch-none flex-col items-center justify-center gap-4 pb-[20vh] text-center"
 	>
 		<p class="text-sm font-medium tracking-widest text-muted-foreground uppercase">Portfolio</p>
 		<h1 class="text-3xl font-bold tracking-tight sm:text-5xl">FE 개발자 장동균입니다.</h1>

@@ -134,7 +134,7 @@
 <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div
 	bind:this={containerEl}
-	class="flex flex-1 flex-col"
+	class="flex flex-1 flex-col touch-pan-y"
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
 	role="region"
