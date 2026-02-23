@@ -93,7 +93,7 @@
 
 	/* 인용구 스타일 */
 	.prose blockquote {
-		@apply rounded-r-lg;
+		@apply rounded-r-lg !py-1;
 	}
 
 	/* 구분선 스타일 */
