@@ -2,6 +2,7 @@
 	import type { Project } from '../../types';
 	import TechBadge from './TechBadge.svelte';
 	import PullToRefreshDemo from './PullToRefreshDemo.svelte';
+	import WalkingDudeDemo from './WalkingDudeDemo.svelte';
 
 	let { project }: { project: Project } = $props();
 
@@ -11,6 +12,7 @@
 	};
 
 	const isPTRProject = $derived(project.name === '카카오 전자문서 Pull To Refresh 개발');
+	const isWeddingProject = $derived(project.name === '모바일 청첩장 제작');
 </script>
 
 {#snippet description()}
@@ -43,6 +45,10 @@
 		<PullToRefreshDemo>
 			{@render description()}
 		</PullToRefreshDemo>
+	{:else if isWeddingProject}
+		<WalkingDudeDemo>
+			{@render description()}
+		</WalkingDudeDemo>
 	{:else}
 		{@render description()}
 	{/if}
