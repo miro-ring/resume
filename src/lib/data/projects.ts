@@ -90,6 +90,19 @@ export const projects: Project[] = [
 		techStack: ['React', 'TypeScript']
 	},
 	{
+		name: '모바일 청첩장 제작',
+		period: {
+			start: '2024-09',
+			end: '2025-09'
+		},
+		description: [
+			'프레임워크 없이 HTML, CSS, JavaScript만으로 처음부터 끝까지 직접 만든 모바일 청첩장.',
+			'SVG 졸라맨 애니메이션, 갤러리, 카카오맵 연동, 파티클 효과, 방명록까지 넣었다. 한글 도메인(동균서정.com)도 직접 연결했다.',
+			'라이브러리에 의존하지 않고 만들어보니 브라우저 API와 CSS 애니메이션에 대한 이해가 깊어졌다.'
+		],
+		techStack: ['HTML', 'CSS', 'JavaScript', 'SVG', 'Swiper', 'Kakao Map API']
+	},
+	{
 		name: '카카오 Jira 관리 도구 (Jiffy) 개발',
 		period: {
 			start: '2024-09',
