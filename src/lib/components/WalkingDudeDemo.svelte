@@ -23,13 +23,20 @@
 	let hasInteracted = $state(false);
 	const SCROLL_DISTANCE = 1200;
 
+	let touchStartY = 0;
+	let touchStartProgress = 0;
+
 	onMount(() => {
 		initAnimation();
 
 		animAreaEl.addEventListener('wheel', handleWheel, { passive: false, capture: true });
+		animAreaEl.addEventListener('touchstart', handleTouchStart, { passive: true });
+		animAreaEl.addEventListener('touchmove', handleTouchMove, { passive: false });
 
 		return () => {
 			animAreaEl.removeEventListener('wheel', handleWheel, { capture: true });
+			animAreaEl.removeEventListener('touchstart', handleTouchStart);
+			animAreaEl.removeEventListener('touchmove', handleTouchMove);
 			masterTl?.kill();
 			bodyTl?.kill();
 			backCycle?.kill();
@@ -190,14 +197,34 @@
 			if (!hasInteracted) hasInteracted = true;
 		}
 	}
+
+	function handleTouchStart(e: TouchEvent) {
+		if (!masterTl) return;
+		touchStartY = e.touches[0].clientY;
+		touchStartProgress = progress;
+	}
+
+	function handleTouchMove(e: TouchEvent) {
+		if (!masterTl) return;
+
+		const deltaY = touchStartY - e.touches[0].clientY;
+		const newProgress = Math.max(0, Math.min(1, touchStartProgress + deltaY / 300));
+
+		if (newProgress !== progress) {
+			e.stopPropagation();
+			e.preventDefault();
+			progress = newProgress;
+			masterTl.progress(progress);
+			if (!hasInteracted) hasInteracted = true;
+		}
+	}
 </script>
 
 <div>
 	<!-- Animation area (이 영역에서만 스크롤 시 애니메이션 동작) -->
 	<div bind:this={animAreaEl} class="anim-area relative flex items-end justify-center gap-2 py-4">
-		<!-- Scroll arrows -->
-		<span class="arrow-left absolute left-2 top-1/2 text-lg text-muted-foreground/30">‹</span>
-		<span class="arrow-right absolute right-2 top-1/2 text-lg text-muted-foreground/30">›</span>
+		<!-- Scroll arrow -->
+		<span class="scroll-arrow absolute right-[calc(50%-120px)] top-1/2 text-sm text-muted-foreground/60">↓</span>
 
 		<!-- Male figure -->
 		<div bind:this={dudeEl} class="h-[120px] w-[80px]">
@@ -232,36 +259,18 @@
 		stroke: hsl(var(--foreground));
 	}
 
-	.arrow-left,
-	.arrow-right {
+	.scroll-arrow {
 		pointer-events: none;
+		animation: arrow-bounce-down 1.2s ease-in-out infinite;
 	}
 
-	.arrow-left {
-		animation: arrow-bounce-left 1.5s ease-in-out infinite;
-	}
-
-	.arrow-right {
-		animation: arrow-bounce-right 1.5s ease-in-out infinite;
-	}
-
-	@keyframes arrow-bounce-left {
+	@keyframes arrow-bounce-down {
 		0%,
 		100% {
-			transform: translateY(-50%) translateX(0);
+			transform: translateY(-50%);
 		}
 		50% {
-			transform: translateY(-50%) translateX(-3px);
-		}
-	}
-
-	@keyframes arrow-bounce-right {
-		0%,
-		100% {
-			transform: translateY(-50%) translateX(0);
-		}
-		50% {
-			transform: translateY(-50%) translateX(3px);
+			transform: translateY(calc(-50% + 4px));
 		}
 	}
 </style>
