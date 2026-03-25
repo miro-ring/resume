@@ -93,18 +93,19 @@
 	function deleteHighlight() {
 		if (!selectedHighlightId) return;
 
-		const mark = proseElement.querySelector(
+		const marks = proseElement.querySelectorAll(
 			`[data-highlight-id="${selectedHighlightId}"]`
-		) as HTMLElement | null;
+		);
 
-		if (mark) {
-			// Unwrap the mark element
+		for (const mark of marks) {
 			const parent = mark.parentNode;
 			while (mark.firstChild) {
 				parent?.insertBefore(mark.firstChild, mark);
 			}
 			parent?.removeChild(mark);
+		}
 
+		if (marks.length > 0) {
 			removeHighlight(getSlug(), selectedHighlightId);
 		}
 

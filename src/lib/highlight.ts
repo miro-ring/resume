@@ -102,13 +102,53 @@ export function wrapWithHighlight(range: Range, id: string): HTMLElement {
 	try {
 		range.surroundContents(mark);
 	} catch {
-		// If selection spans multiple elements, use extractContents
-		const contents = range.extractContents();
-		mark.appendChild(contents);
-		range.insertNode(mark);
+		// Selection spans multiple elements - wrap each text node individually
+		const textNodes = getTextNodesInRange(range);
+		for (const { node, start, end } of textNodes) {
+			const text = node.textContent || '';
+			if (start >= text.length || text.slice(start, end).trim() === '') continue;
+
+			const wrappingRange = document.createRange();
+			wrappingRange.setStart(node, start);
+			wrappingRange.setEnd(node, end);
+
+			const m = document.createElement('mark');
+			m.className = 'highlight-mark';
+			m.dataset.highlightId = id;
+			wrappingRange.surroundContents(m);
+		}
+		return mark;
 	}
 
 	return mark;
+}
+
+function getTextNodesInRange(range: Range): { node: Text; start: number; end: number }[] {
+	const result: { node: Text; start: number; end: number }[] = [];
+	const container = range.commonAncestorContainer;
+
+	if (container.nodeType === Node.TEXT_NODE) {
+		result.push({ node: container as Text, start: range.startOffset, end: range.endOffset });
+		return result;
+	}
+
+	const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
+	let node: Text | null;
+	let started = false;
+
+	while ((node = walker.nextNode() as Text | null)) {
+		if (node === range.startContainer) {
+			started = true;
+			result.push({ node, start: range.startOffset, end: node.textContent?.length || 0 });
+		} else if (node === range.endContainer) {
+			result.push({ node, start: 0, end: range.endOffset });
+			break;
+		} else if (started) {
+			result.push({ node, start: 0, end: node.textContent?.length || 0 });
+		}
+	}
+
+	return result;
 }
 
 export function restoreHighlights(container: HTMLElement, highlights: Highlight[]): void {
