@@ -9,12 +9,14 @@ published: true
 
 최근 케이가 하정우의 재치 있는 유머들을 소개한 순간이 있었다. 문득, 나에게 있어 하정우 같은 사람은 누가 있을지 생각해봤다.
 
-나는 토스에서 운영하는 유튜브 채널 '머니그라피'를 좋아한다. 이곳에 최근 김간지, 허키, 김민경(민음사) 세 사람이 진행하는 콘텐츠가 올라오기 시작했다. 숏폼의 바다와도 같은 요즘, 1시간이 넘는 이 영상들의 조회수가 모두 100만을 훌쩍 넘는다. 특출나게 재미있는 것도, 엄청난 정보가 있는 것도 아니다. 그런데도 세 사람이 보여주는 합은 한 시간이라는 시간이 어떻게 흘러갔는지조차 모르게 만든다.
+나는 토스에서 운영하는 유튜브 채널 ['머니그라피'](https://www.youtube.com/@Moneygraphy)를 좋아한다. 이곳에 최근 김간지, 허키, 김민경(민음사) 세 사람이 진행하는 콘텐츠가 올라오기 시작했다. 숏폼의 바다와도 같은 요즘, 1시간이 넘는 이 영상들의 조회수가 모두 100만을 훌쩍 넘는다. 특출나게 재미있는 것도, 엄청난 정보가 있는 것도 아니다. 그런데도 세 사람이 보여주는 합은 한 시간이라는 시간이 어떻게 흘러갔는지조차 모르게 만든다.
 
 그 중에서도 나는 허키를 좋아한다. (이름에 욕이 있어서 이 부분은 빼고 부르겠다. 나는 욕을 싫어한다.)
 
 <div style="display: flex; justify-content: center;">
-  <img src="https://i.namu.wiki/i/so0hCSA6kJ1y_LWtfbQGzq0CbHkY86zrmsdB4tfDtOr7tNKMlAjLpoc64w9Y4x77cSkqQXggN-GKYu8vWaLSYy8lNly71yLbyu0xyeOTI7rdFCcsYYhrJFv6PEzLnwbTqOllfYb_9gcxKNuHHunUPA.webp" style="width: 100%; max-width: 300px; object-fit: cover; border-radius: 8px;" />
+  <a href="https://namu.wiki/w/Free%20Hukky%20Shibaseki%20%26%20the%20God%20Sun%20Symphony%20Group%20:%20Odyssey.1" target="_blank" rel="noopener noreferrer">
+    <img src="https://i.namu.wiki/i/so0hCSA6kJ1y_LWtfbQGzq0CbHkY86zrmsdB4tfDtOr7tNKMlAjLpoc64w9Y4x77cSkqQXggN-GKYu8vWaLSYy8lNly71yLbyu0xyeOTI7rdFCcsYYhrJFv6PEzLnwbTqOllfYb_9gcxKNuHHunUPA.webp" style="width: 100%; max-width: 300px; object-fit: cover; border-radius: 8px;" />
+  </a>
 </div>
 
 허키라는 프로듀서를 처음 알게 된 건 비프리와 함께 낸 앨범을 듣게 되면서부터이다. 직설적인 가사와 트렌디한 비트, 힙알못인 나도 이 앨범이 정말 잘 만들어졌다는 걸 단번에 느낄 수 있었다. 하지만 그때까지만 해도 내가 접한 건 어디까지나 '프로듀서 허키'였을 뿐, '사람 허키'는 전혀 모르는 상태였다. 그러다 우연히 머니그라피에 나온 '사람 허키'를 보게 되었고, 그대로 스며들어 버렸다.
