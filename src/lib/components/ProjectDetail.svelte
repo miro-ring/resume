@@ -5,6 +5,7 @@
 	import WalkingDudeDemo from './WalkingDudeDemo.svelte';
 	import JiffyDemo from './JiffyDemo.svelte';
 	import BuggerkingDemo from './BuggerkingDemo.svelte';
+	import KeypadButtonDemo from './KeypadButtonDemo.svelte';
 
 	let { project }: { project: Project } = $props();
 
@@ -17,6 +18,7 @@
 	const isWeddingProject = $derived(project.name === '모바일 청첩장 제작');
 	const isJiffyProject = $derived(project.name === '카카오 Jira 관리 도구 (Jiffy) 개발');
 	const isBuggerkingProject = $derived(project.name === '카카오 웹뷰 디버거 (버거킹) 개발');
+	const isKeypadButtonProject = $derived(project.name === '카카오 전자증명서 키패드 위에 버튼');
 </script>
 
 {#snippet description()}
@@ -41,7 +43,7 @@
 <div
 	class={[
 		'w-full space-y-4 sm:space-y-5',
-		isBuggerkingProject ? 'max-w-2xl' : 'max-w-lg',
+		isBuggerkingProject || isKeypadButtonProject ? 'max-w-2xl' : 'max-w-lg',
 		isBuggerkingProject ? '-mt-[5vh] sm:-mt-[10vh]' : ''
 	].join(' ')}
 >
@@ -68,6 +70,10 @@
 		<BuggerkingDemo>
 			{@render description()}
 		</BuggerkingDemo>
+	{:else if isKeypadButtonProject}
+		<KeypadButtonDemo>
+			{@render description()}
+		</KeypadButtonDemo>
 	{:else}
 		{@render description()}
 	{/if}
