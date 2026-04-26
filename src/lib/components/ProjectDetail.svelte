@@ -3,6 +3,7 @@
 	import TechBadge from './TechBadge.svelte';
 	import PullToRefreshDemo from './PullToRefreshDemo.svelte';
 	import WalkingDudeDemo from './WalkingDudeDemo.svelte';
+	import JiffyDemo from './JiffyDemo.svelte';
 
 	let { project }: { project: Project } = $props();
 
@@ -13,6 +14,7 @@
 
 	const isPTRProject = $derived(project.name === '카카오 전자문서 Pull To Refresh 개발');
 	const isWeddingProject = $derived(project.name === '모바일 청첩장 제작');
+	const isJiffyProject = $derived(project.name === '카카오 Jira 관리 도구 (Jiffy) 개발');
 </script>
 
 {#snippet description()}
@@ -49,6 +51,10 @@
 		<WalkingDudeDemo>
 			{@render description()}
 		</WalkingDudeDemo>
+	{:else if isJiffyProject}
+		<JiffyDemo>
+			{@render description()}
+		</JiffyDemo>
 	{:else}
 		{@render description()}
 	{/if}
