@@ -15,4 +15,5 @@ export type Project = {
 	};
 	description: string[]; // List of main tasks/achievements
 	techStack?: string[]; // ["React", "TypeScript", "Tailwind CSS"]
+	links?: { label: string; url: string }[];
 };

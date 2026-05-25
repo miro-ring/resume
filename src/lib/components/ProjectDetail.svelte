@@ -6,6 +6,7 @@
 	import JiffyDemo from './JiffyDemo.svelte';
 	import BuggerkingDemo from './BuggerkingDemo.svelte';
 	import KeypadButtonDemo from './KeypadButtonDemo.svelte';
+	import { Github, Link as LinkIcon, ArrowUpRight } from '@lucide/svelte';
 
 	let { project }: { project: Project } = $props();
 
@@ -22,6 +23,30 @@
 </script>
 
 {#snippet description()}
+	{#if project.links?.length}
+		<div class="flex flex-wrap gap-2 pb-2 sm:pb-3">
+			{#each project.links as link}
+				{@const isGithub = link.url.includes('github.com')}
+				<a
+					href={link.url}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-sm ring-1 ring-primary/20 transition-all hover:shadow-md hover:ring-primary/40"
+				>
+					{#if isGithub}
+						<Github class="size-3.5" />
+					{:else}
+						<LinkIcon class="size-3.5" />
+					{/if}
+					<span>{link.label}</span>
+					<ArrowUpRight
+						class="size-3.5 transition-transform group-hover:-translate-y-px group-hover:translate-x-px"
+					/>
+				</a>
+			{/each}
+		</div>
+	{/if}
+
 	<div
 		class="space-y-2 text-sm leading-relaxed text-muted-foreground sm:text-[15px] sm:leading-loose"
 	>
