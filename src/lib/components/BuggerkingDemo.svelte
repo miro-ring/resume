@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	let { children }: { children: Snippet } = $props();
 
@@ -48,6 +48,20 @@
 	let savedLdap = $state('');
 	let logs = $state<LogEntry[]>([]);
 	let nextLogId = 0;
+
+	// Shrink the (wide, two-panel) demo on mobile so it fits the screen.
+	let isMobile = $state(false);
+	const scale = $derived(isMobile ? 0.55 : 1);
+
+	onMount(() => {
+		const mql = window.matchMedia('(max-width: 640px)');
+		isMobile = mql.matches;
+		const onChange = (e: MediaQueryListEvent) => {
+			isMobile = e.matches;
+		};
+		mql.addEventListener('change', onChange);
+		return () => mql.removeEventListener('change', onChange);
+	});
 
 	let btnX = $state(FRAME_W - BTN - 12);
 	let btnY = $state(FRAME_H - BTN - 12);
@@ -151,7 +165,11 @@
 </script>
 
 <div class="space-y-3" onkeydown={stopArrowPropagation} role="presentation">
-	<div class="flex flex-row items-start justify-start gap-4">
+	<div style="width: {(FRAME_W * 2 + 16) * scale}px; height: {FRAME_H * scale}px;">
+	<div
+		class="flex w-fit flex-row items-start justify-start gap-4"
+		style="transform: scale({scale}); transform-origin: top left;"
+	>
 		<div
 			class="relative shrink-0 overflow-hidden rounded-[22px] border-[3px] border-foreground/70 bg-background shadow-md"
 			style="width: {FRAME_W}px; height: {FRAME_H}px;"
@@ -318,8 +336,9 @@
 			</div>
 		</div>
 	</div>
+	</div>
 
-	<div class="pt-1" style="width: {FRAME_W * 2 + 16}px;">
+	<div class="w-full max-w-full pt-1 sm:w-[var(--bk-text-w)]" style="--bk-text-w: {FRAME_W * 2 + 16}px;">
 		{@render children()}
 	</div>
 </div>

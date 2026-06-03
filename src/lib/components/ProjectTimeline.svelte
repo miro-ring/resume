@@ -158,7 +158,7 @@
 	</div>
 
 	<!-- S-shaped Timeline -->
-	<nav class="shrink-0 px-2 pb-6 pt-2 sm:px-6 sm:pb-12" aria-label="타임라인 네비게이션">
+	<nav class="hidden shrink-0 px-2 pb-6 pt-2 sm:block sm:px-6 sm:pb-12" aria-label="타임라인 네비게이션">
 		{#each rows as row, rowIndex}
 			{@const isEven = rowIndex % 2 === 0}
 			{@const isReversed = !isEven}

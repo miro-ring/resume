@@ -1,11 +1,29 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { onMount } from 'svelte';
 
 	let { children }: { children: Snippet } = $props();
 
 	const FRAME_W = 280;
 	const FRAME_H = 460;
 	const KB_H = 170;
+
+	// Shrink the phone mockup on mobile so the demo + description fit the screen.
+	let isMobile = $state(false);
+	const scale = $derived(isMobile ? 0.72 : 1);
+	// On mobile, also trim the frame's empty mid-section (the form sits at the
+	// top, the "다음" button is bottom-anchored), so the demo is less tall.
+	const frameH = $derived(isMobile ? 360 : FRAME_H);
+
+	onMount(() => {
+		const mql = window.matchMedia('(max-width: 640px)');
+		isMobile = mql.matches;
+		const onChange = (e: MediaQueryListEvent) => {
+			isMobile = e.matches;
+		};
+		mql.addEventListener('change', onChange);
+		return () => mql.removeEventListener('change', onChange);
+	});
 
 	const KB_ROWS = [
 		['ㅂ', 'ㅈ', 'ㄷ', 'ㄱ', 'ㅅ', 'ㅛ', 'ㅕ', 'ㅑ', 'ㅐ', 'ㅔ'],
@@ -68,13 +86,14 @@
 </script>
 
 <div
-	class="flex flex-row items-start justify-start gap-8"
+	class="flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-start sm:gap-8"
 	onkeydown={stopArrowPropagation}
 	role="presentation"
 >
+	<div class="shrink-0" style="width: {FRAME_W * scale}px; height: {frameH * scale}px;">
 	<div
-		class="relative shrink-0 overflow-hidden rounded-[22px] border-[3px] border-foreground/70 bg-background shadow-md"
-		style="width: {FRAME_W}px; height: {FRAME_H}px;"
+		class="relative overflow-hidden rounded-[22px] border-[3px] border-foreground/70 bg-background shadow-md"
+		style="width: {FRAME_W}px; height: {frameH}px; transform: scale({scale}); transform-origin: top left;"
 		onpointerdown={onFramePointerDown}
 	>
 			<div class="flex h-5 items-center justify-center bg-foreground/70 text-[8px] text-background">
@@ -178,8 +197,9 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
-	<div class="min-w-0 flex-1 pt-2">
+	<div class="w-full min-w-0 sm:flex-1 sm:pt-2">
 		{@render children()}
 	</div>
 </div>

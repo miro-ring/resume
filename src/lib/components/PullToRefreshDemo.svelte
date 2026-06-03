@@ -1,7 +1,10 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { onMount } from 'svelte';
 
 	let { children }: { children: Snippet } = $props();
+
+	let containerEl: HTMLDivElement;
 
 	let pullY = $state(0);
 	let isRefreshing = $state(false);
@@ -103,15 +106,27 @@
 		mouseDown = false;
 		endPull(e);
 	}
+
+	// Attach touch listeners manually with { passive: false }. Svelte's
+	// declarative ontouchmove is registered as passive, which makes the
+	// e.preventDefault() inside movePull throw and the gesture break.
+	onMount(() => {
+		containerEl.addEventListener('touchstart', handleTouchStart, { passive: false });
+		containerEl.addEventListener('touchmove', handleTouchMove, { passive: false });
+		containerEl.addEventListener('touchend', handleTouchEnd);
+		return () => {
+			containerEl.removeEventListener('touchstart', handleTouchStart);
+			containerEl.removeEventListener('touchmove', handleTouchMove);
+			containerEl.removeEventListener('touchend', handleTouchEnd);
+		};
+	});
 </script>
 
 <svelte:window onmousemove={handleMouseMove} onmouseup={handleMouseUp} />
 
 <div
+	bind:this={containerEl}
 	class="relative select-none touch-pan-x"
-	ontouchstart={handleTouchStart}
-	ontouchmove={handleTouchMove}
-	ontouchend={handleTouchEnd}
 	onmousedown={handleMouseDown}
 	role="presentation"
 	style="cursor: {isPulling ? 'grabbing' : 'grab'};"
