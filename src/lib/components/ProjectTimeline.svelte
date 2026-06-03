@@ -5,7 +5,8 @@
 	import ProjectDetail from './ProjectDetail.svelte';
 	import TimelineDot from './TimelineDot.svelte';
 
-	let { onGoBack = () => {} }: { onGoBack?: () => void } = $props();
+	let { active = true, onGoBack = () => {} }: { active?: boolean; onGoBack?: () => void } =
+		$props();
 
 	let activeIndex = $state(0);
 	let isAnimating = $state(false);
@@ -57,13 +58,31 @@
 		});
 	}
 
+	// Lock the wheel for the duration of a single scroll gesture. Trackpad/
+	// inertial scrolling keeps firing events after the transition animation
+	// ends, which would otherwise advance an extra step. We only act on the
+	// first event of a gesture and stay locked until wheel activity has been
+	// quiet for a short window.
+	let wheelLocked = false;
+	let wheelIdleTimer: ReturnType<typeof setTimeout> | null = null;
+
 	function handleWheel(e: WheelEvent) {
 		e.preventDefault();
-		if (isAnimating) return;
 
 		const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+		if (Math.abs(delta) < 4) return;
+
+		// Any wheel activity (including momentum) keeps the gesture alive and
+		// pushes back the moment we unlock.
+		if (wheelIdleTimer) clearTimeout(wheelIdleTimer);
+		wheelIdleTimer = setTimeout(() => {
+			wheelLocked = false;
+		}, 200);
+
+		if (wheelLocked || isAnimating) return;
 		if (Math.abs(delta) < 10) return;
 
+		wheelLocked = true;
 		if (delta > 0) {
 			goTo(activeIndex + 1);
 		} else {
@@ -74,6 +93,20 @@
 			}
 		}
 	}
+
+	// When the timeline becomes active, the same scroll gesture that triggered
+	// the intro transition may still be sending inertial wheel events. Lock the
+	// wheel on entry until that activity settles so we don't skip a step. The
+	// seed timer guarantees we unlock even if no momentum arrives (e.g. entered
+	// via keyboard); incoming wheel events extend the lock via handleWheel.
+	$effect(() => {
+		if (!active) return;
+		wheelLocked = true;
+		if (wheelIdleTimer) clearTimeout(wheelIdleTimer);
+		wheelIdleTimer = setTimeout(() => {
+			wheelLocked = false;
+		}, 450);
+	});
 
 	let touchStartX = 0;
 	function handleTouchStart(e: TouchEvent) {
@@ -137,6 +170,7 @@
 			mql.removeEventListener('change', handleResize);
 			window.removeEventListener('keydown', handleKeydown, { capture: true });
 			containerEl.removeEventListener('wheel', handleWheel);
+			if (wheelIdleTimer) clearTimeout(wheelIdleTimer);
 		};
 	});
 </script>

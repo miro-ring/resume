@@ -137,6 +137,6 @@
 		bind:this={mainEl}
 		class="hidden h-full flex-col"
 	>
-		<ProjectTimeline onGoBack={goBack} />
+		<ProjectTimeline active={started} onGoBack={goBack} />
 	</div>
 </div>
