@@ -152,7 +152,7 @@ export const resumeProjects: ResumeProject[] = [
 		]
 	},
 	{
-		name: '카카오 Jira 관리 도구 (Jiffy)',
+		name: 'Jira 관리 도구 (Jiffy)',
 		period: '2024.08 – 현재',
 		domain: '사내 솔루션 · Mac 데스크톱 앱',
 		overview:
