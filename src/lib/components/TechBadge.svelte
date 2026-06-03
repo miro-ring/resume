@@ -17,7 +17,20 @@
 		Docker: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200',
 		WebSocket: 'bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300',
 		Swiper: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
-		GSAP: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'
+		GSAP: 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300',
+		Recharts: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+		'Next.js': 'bg-neutral-200 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200',
+		Rust: 'bg-orange-200 text-orange-900 dark:bg-orange-900/40 dark:text-orange-200',
+		Tauri: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
+		Kubernetes: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300',
+		Playwright: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+		Vitest: 'bg-lime-100 text-lime-700 dark:bg-lime-900/30 dark:text-lime-300',
+		MSW: 'bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300',
+		'React Query': 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-300',
+		'React Router': 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300',
+		'React Hook Form': 'bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-300',
+		Zustand: 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-200',
+		Homebrew: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300'
 	};
 
 	const colorClass =
