@@ -242,6 +242,14 @@
 		</div>
 	</div>
 
+	<!-- Scroll hint (fades out after first interaction) -->
+	<p
+		class="scroll-hint -mt-2 mb-1 text-center text-xs text-muted-foreground/60"
+		class:faded={hasInteracted}
+	>
+		아래로 스크롤해보세요
+	</p>
+
 	<!-- Content -->
 	<div>
 		{@render children()}
@@ -262,6 +270,15 @@
 	.scroll-arrow {
 		pointer-events: none;
 		animation: arrow-bounce-down 1.2s ease-in-out infinite;
+	}
+
+	.scroll-hint {
+		pointer-events: none;
+		transition: opacity 0.4s ease;
+	}
+
+	.scroll-hint.faded {
+		opacity: 0;
 	}
 
 	@keyframes arrow-bounce-down {
