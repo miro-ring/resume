@@ -44,3 +44,5 @@ published: true
 <img src="/images/gapyong.jpeg" width="400" style="display:flex; margin: 0 auto" />
 
 이 시기에 함께 떠났던 가평 여행. 아직도 이때 이야기만 하면 웃음이 멈추지 않는다.
+
+<iframe src="https://map.kakao.com/link/map/평창 닭다리고추장불고기 자양본점,37.53212333318711,127.07981213916537" width="100%" height="350" style="border:0; border-radius:8px;" allowfullscreen loading="lazy"></iframe>
