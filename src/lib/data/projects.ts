@@ -123,7 +123,7 @@ export const projects: Project[] = [
 		links: [
 			{
 				label: '동균서정.com',
-				url: 'https://동균서정.com'
+				url: 'https://miro-ring.github.io/wedding-invitation/'
 			}
 		]
 	},
