@@ -1,0 +1,217 @@
+---
+title: '야차의 시대'
+description: '야차의 시대'
+date: '2026-7-26'
+categories:
+  - etc
+published: true
+---
+
+2045년 어느날…. 법치에 기반한 민주주의가 무너지고 개인을 보호해줄 존재는 사라졌다.
+그런 시대에 생겨난 헌법 위의 한가지 룰. 그것이 야차다.
+
+길을 가다 마음에 들지 않은 상대를 만나면 야차를 걸 수 있고, 이를 거부하기 위해서는 상대방에게 10만원을 주어야한다.
+
+좁은 지하철에서 사람들의 어깨를 툭툭 치면서 지나감. 사람들의 아우성이 있음. 주인공 김야차는 조용히 그 사람을 따라감. 그리고 야차를 신청. 상대방은 10만원을 낼 능력이 없는 사람이기에 야차를 수락하고. 수락하자마자 주인공은 그 사람을 발로 차서 문밖으로 밀어냄.
+
+만석 버스에서 바깥쪽에 앉고 안쪽에는 본인 가방을 올려둠. 야차 선언 후 발로 차서 안쪽 자리로 밀어 넣음. 그리고 유유히 바깥쪽 자리에 앉아 이동.
+
+인도로 오토바이가 다님. 따라가서 야차 선언 후 주행중인 오토바이 운전자를 공중에서 발로 차버림
+
+거주지 1층 앞에서 담배를 핌. 나가서 집 앞에서는 담배를 피지말라고 선도. 하지만 본인들은 촉법이라며 맘대로 하라고 함. 바로 야차를 신청.
+
+끼어들기 단속 차로에서 사람들은 줄 서 있는데 얌체 차량들이 맨앞에 가서 끼어들기를 시도함. 주인공이 차에 내려서 그 차로 가서 야차 신청.
+
+주인공은 야차로 번 돈으로 힘없고 착한 사람들을 도와줌. 야차의 시대에서는 오히려 살기 위해 어떻게든 타인에게 피해를 주려하지 않음. 그렇게 모두가 행복한 야차의 시대가 도래함.
+
+<script>
+	const panels = [
+		{ n: 1, scene: 'S1 지하철' },
+		{ n: 2 },
+		{ n: 3 },
+		{ n: 4 },
+		{ n: 5 },
+		{ n: 6 },
+		{ n: 7 },
+		{ n: 8 },
+		{ n: 9, pause: true },
+		{ n: 10 },
+		{ n: 11, pause: true },
+		{ n: 12, scene: 'S2 시내버스' },
+		{ n: 13 },
+		{ n: 14 },
+		{ n: 15 },
+		{ n: 16 },
+		{ n: 17 },
+		{ n: 18 },
+		{ n: 19, scene: 'S3 상가 인도' },
+		{ n: 20 },
+		{ n: 21 },
+		{ n: 22 },
+		{ n: 23 },
+		{ n: 24, pause: true },
+		{ n: 25 },
+		{ n: 26, scene: 'S4 빌라 앞' },
+		{ n: 27 },
+		{ n: 28 },
+		{ n: 29 },
+		{ n: 30 },
+		{ n: 31 },
+		{ n: 32, pause: true },
+		{ n: 33 },
+		{ n: 34 },
+		{ n: 35, scene: 'S5 정체 차로' },
+		{ n: 36 },
+		{ n: 37 },
+		{ n: 38 },
+		{ n: 39 },
+		{ n: 40 },
+		{ n: 41 },
+		{ n: 42, pause: true },
+		{ n: 43, scene: 'S6 재래시장' },
+		{ n: 44 },
+		{ n: 45 },
+		{ n: 46, pause: true },
+		{ n: 47 },
+		{ n: 48 },
+		{ n: 49 },
+		{ n: 50, pause: true },
+		{ n: 51, scene: 'S7 폐법원' },
+		{ n: 52, pause: true },
+		{ n: 53 },
+		{ n: 54, pause: true }
+	];
+
+	const panelNumber = (n) => String(n).padStart(3, '0');
+	const panelSrc = (n) => `/images/yacha/ep01/panel_${panelNumber(n)}.jpg`;
+	const panelAlt = (n) => `야차의 시대 제1화 ${panelNumber(n)}번째 패널`;
+</script>
+
+<section class="yacha-reader not-prose" aria-label="야차의 시대 제1화 웹툰">
+	<header class="reader-head">
+		<strong>야차의 시대</strong>
+		<span>제1화 「값을 내」</span>
+	</header>
+
+	<div class="strip">
+		{#each panels as panel}
+			<figure
+				class={['panel', panel.scene ? 'scene-start' : '', panel.pause ? 'pause' : '']
+					.filter(Boolean)
+					.join(' ')}
+				data-scene={panel.scene}
+			>
+				<img loading="lazy" decoding="async" src={panelSrc(panel.n)} alt={panelAlt(panel.n)} />
+			</figure>
+		{/each}
+	</div>
+
+</section>
+
+<style>
+	.yacha-reader {
+		--reader-max: 720px;
+		--page-bg: #0b0b0d;
+		--strip-bg: #000;
+		--crimson: #d7263d;
+		width: min(100%, var(--reader-max));
+		margin: 0 auto;
+		background: var(--page-bg);
+		color: #f2f2f4;
+		font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', system-ui, sans-serif;
+		-webkit-text-size-adjust: 100%;
+	}
+
+	.reader-head {
+		background: rgba(11, 11, 13, 0.96);
+		border-bottom: 1px solid #1e1e22;
+		color: #f2f2f4;
+		font-size: 13px;
+		letter-spacing: 0.04em;
+		padding: 11px 12px;
+		text-align: center;
+	}
+
+	.reader-head strong {
+		font-weight: 800;
+	}
+
+	.reader-head span {
+		color: var(--crimson);
+		font-weight: 700;
+	}
+
+	.strip {
+		display: flex;
+		flex-direction: column;
+		background: var(--strip-bg);
+	}
+
+	.panel {
+		position: relative;
+		margin: 0;
+		line-height: 0;
+	}
+
+	.panel img {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin: 0 !important;
+		border-radius: 0 !important;
+		background: #111;
+		box-shadow: none !important;
+	}
+
+	.panel.scene-start {
+		margin-top: 88px;
+	}
+
+	.panel.scene-start::before {
+		position: absolute;
+		top: -58px;
+		right: 0;
+		left: 0;
+		color: #4a4a52;
+		content: attr(data-scene);
+		font-size: 11px;
+		letter-spacing: 0.28em;
+		line-height: 1.4;
+		text-align: center;
+	}
+
+	.panel.pause {
+		margin-top: 52px;
+	}
+
+	.panel.scene-start.pause {
+		margin-top: 88px;
+	}
+
+	.reader-foot {
+		max-width: var(--reader-max);
+		margin: 0 auto;
+		padding: 56px 16px 90px;
+		color: #6f6f78;
+		font-size: 12px;
+		line-height: 1.9;
+		text-align: center;
+	}
+
+	.reader-foot .rule {
+		color: var(--crimson);
+		font-size: 11px;
+		letter-spacing: 0.2em;
+	}
+
+	.reader-foot span {
+		display: block;
+		margin-top: 14px;
+		color: #c9c9d2;
+		font-size: 13px;
+	}
+
+	.reader-foot .count {
+		margin-top: 22px;
+	}
+</style>
