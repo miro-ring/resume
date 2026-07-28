@@ -21,7 +21,10 @@ export const profile = {
 	since: '2021.11',
 	summary:
 		'카카오에서 2021년 11월부터 프론트엔드 엔지니어로 일하며, 카카오톡 안에서 동작하는 B2C 서비스(전자증명서·전자문서)부터 기업 고객용 관리자 사이트(지갑파트너센터), 개발자들이 쓰는 사내 도구(웹뷰 디버거·Jiffy)까지 여러 종류의 상용 서비스를 만들어 왔습니다. 차트로 데이터를 보여주는 화면, 앱처럼 자연스러운 모바일 인터랙션, 그리고 자동화된 테스트·배포로 안정적으로 서비스를 운영하는 일에 강점이 있습니다.',
-	links: [{ label: 'GitHub', url: 'https://github.com/miro-ring' }]
+	links: [
+		{ label: '자기소개', url: 'https://미로.com' },
+		{ label: 'GitHub', url: 'https://github.com/miro-ring' }
+	]
 };
 
 export const competencies: { label: string; items: string }[] = [
