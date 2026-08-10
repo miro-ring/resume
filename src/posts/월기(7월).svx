@@ -1,6 +1,6 @@
 ---
-title: '8월 (월기)'
-description: 8월 (월기)
+title: '7월 (월기)'
+description: 7월 (월기)
 date: '2026-8-10'
 categories:
   - etc
